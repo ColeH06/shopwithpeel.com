@@ -1,1 +1,603 @@
-shopwithpeel.com
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discover Products, Compare Prices | Peel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+  background: black;
+  
+  color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes glowIconBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.05);
+  }
+}
+
+.animate-glow-icon {
+  box-shadow: 0 0 60px rgba(18, 242, 95, 0.2);
+  animation: glowIconBounce 2s ease-in-out infinite;
+}
+
+.glow-ring {
+  position: relative;
+  z-index: 1;
+}
+
+.glow-ring::before {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 9999px;
+  background: radial-gradient(rgba(18, 242, 95, 0.5), rgba(18, 242, 95, 0) 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(60px);
+  z-index: -1;
+}
+
+@keyframes subtleBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-subtle-bounce {
+  animation: subtleBounce 2.5s ease-in-out infinite;
+}
+
+.glow-brain {
+    filter: drop-shadow(0 0 18px #12f25f);
+  }
+
+  @keyframes fadeInUpBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  60% {
+    transform: translateY(-6px);
+  }
+  80% {
+    transform: translateY(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up-bounce {
+  animation: fadeInUpBounce 1.2s ease-out forwards;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+    </style>
+  </head>
+
+  <body class="text-white font-sans min-h-screen overflow-x-hidden">
+    <header class="relative flex items-center justify-between px-8 py-4 h-20 overflow-visible border-b border-gray-800 sm:border-b">
+      <div class="absolute top-[60%] left-4 sm:top-1/2 sm:left-8 transform -translate-y-[45%]">
+          <img src="/static/peel-logo.png"
+               alt="Peel Beta Logo"
+               class="h-36 sm:h-28 w-auto mx-auto md:mx-0" />
+          </div>
+      
+        <!-- Desktop Nav -->
+<nav class="ml-auto hidden md:flex items-center space-x-8">
+  <a href="#how-it-works" class="text-gray-300 hover:text-green-400">How it Works</a>
+  <a href="#about" class="text-gray-300 hover:text-green-400">About</a>
+  <a href="#vision" class="text-gray-300 hover:text-green-400">Our Vision</a>
+  <a href="#contact" class="text-gray-300 hover:text-green-400">Contact</a>
+  <button id="login-btn" class="bg-green-500 text-black font-semibold px-5 py-2 rounded hover:bg-green-400 transition ml-4">
+    Login
+  </button>
+</nav>
+
+<!-- Mobile Hamburger -->
+<div class="md:hidden absolute top-6" style="right: -20px;">
+  <button id="hamburger-btn" class="text-green-400 text-4xl focus:outline-none">
+    ☰
+  </button>
+</div>
+
+      </header> 
+      
+      <div id="mobile-menu" class="fixed top-0 left-0 w-full h-[32vh] bg-[#121212] z-50 hidden md:hidden shadow-lg">
+        <div class="flex justify-end p-4">
+          <button id="close-menu" class="text-3xl text-white">&times;</button>
+        </div>
+        <nav class="flex flex-col items-center divide-y divide-gray-700">
+          <a href="#how-it-works" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">How it Works</a>
+          <a href="#about" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">About</a>
+          <a href="#vision" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">Our Vision</a>
+          <a href="#contact" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">Contact</a>
+          <a href="javascript:void(0)" id="login-btn-mobile" class="mobile-link text-green-400 font-bold text-xl opacity-0 py-2 w-full text-center">Login</a>
+        </nav>
+      </div>                      
+
+      <section class="flex flex-col-reverse md:flex-row items-center justify-between px-6 py-24 md:py-32 text-center md:text-left">
+        <div class="hidden sm:block ml-16 sm:ml-10 md:ml-8 lg:ml-8 space-y-6 max-w-[95%] sm:max-w-[90%] md:max-w-xl">
+          <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
+            Shop <span class="text-green-400">Smarter</span><br />
+            Match <span class="text-green-400">Better</span>
+          </h2>                  
+      
+          <p class="text-gray-300 text-lg max-w-[320px] mx-auto sm:mx-0 sm:max-w-none sm:ml-0 ml-6">
+            Discover the smartest way to find and compare products across<br>stores online — powered by AI.
+          </p>          
+  
+          <button id="signup-btn" class="bg-green-600 text-white px-6 py-3 rounded font-semibold hover:bg-green-400 transition">
+            Create Free Account
+          </button>                   
+          </div>
+        </div>
+
+        <div class="block sm:hidden mx-auto text-center space-y-6 px-4 max-w-[90%] mt-6">
+          <h2 class="text-6xl font-extrabold leading-tight whitespace-nowrap mt-[-85px] ml-[-25px]">
+            Shop <span class="text-green-400">Smarter<br></span> 
+            Match <span class="text-green-400">Better</span>
+          </h2>                  
+        
+          <p class="text-2xl sm:text-3xl text-gray-300 leading-normal ml-15 mt-6 w-[90vw] max-w-[500px] text-left">
+            Discover the smartest way to <br>find and compare products across stores online — powered by AI.
+          </p>                   
+        
+          <button id="signup-btn-mobile" class="bg-green-600 text-white text-xl px-10 py-5 rounded-xl font-semibold hover:bg-green-400 transition ml-[32px] mt-0 whitespace-nowrap">
+            Create Free Account
+          </button>                                                      
+        </div>                                 
+
+        <div id="mobile-graphic" class="relative opacity-0 translate-y-12 mx-auto md:hidden mt-[-100px] left-[3%]">
+          <img src="/static/peel-mobile-graphic.png"
+               alt="Mobile Shopping Graphic"
+               class="w-[420px] max-w-[100%] h-auto drop-shadow-[0_0_40px_#12f25f]" />
+        </div>             
+        
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const video = document.getElementById("peel-demo");
+            const wrapper = document.getElementById("video-wrapper");
+        
+            if (!video || !wrapper) return;
+        
+            video.addEventListener("timeupdate", () => {
+              const t = video.currentTime;
+        
+              if (t >= 9.2 && t < 25) {
+                video.classList.remove("scale-[1.6]", "top-[-40px]", "left-[0.50px]", "w-[1000px]");
+                video.classList.add("scale-[1.25]", "top-[-50px]", "left-[-24px]", "w-[550px]");
+        
+                wrapper.classList.remove("w-[840px]");
+                wrapper.classList.add("w-[570px]");
+              } else {
+                video.classList.remove("scale-[1.2]", "top-[-50px]", "left-[-24px]", "w-[550px]");
+                video.classList.add("scale-[1.6]", "top-[-40px]", "left-[0.2px]", "w-[1000px]");
+        
+                wrapper.classList.remove("w-[570px]");
+                wrapper.classList.add("w-[840px]");
+              }
+            });
+          });
+        </script>        
+        
+        <script>
+          document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+        
+            const form = e.target;
+            const formData = new FormData(form);
+        
+            fetch("https://formsubmit.co/ajax/contact.shopwithpeel@gmail.com", {
+              method: "POST",
+              headers: { 'Accept': 'application/json' },
+              body: formData
+            }).then(response => {
+              if (response.ok) {
+                document.getElementById('form-status').classList.remove('hidden');
+                form.reset();
+              } else {
+                alert('❌ Failed to send. Try again later.');
+              }
+            }).catch(error => {
+              console.error('FormSubmit error:', error);
+              alert('❌ Something went wrong.');
+            });
+          });
+        </script>     
+        
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const glowSearch = document.getElementById("glow-search");
+            const cartIcon = document.getElementById("cart-icon");
+            const glowBrain = document.getElementById("glow-brain");
+        
+            let glowSearchAnimated = false;
+            let cartAnimated = false;
+            let brainAnimated = false;
+        
+            window.addEventListener("scroll", () => {
+              const winHeight = window.innerHeight;
+        
+              if (glowSearch && !glowSearchAnimated) {
+                const rect = glowSearch.getBoundingClientRect();
+                if (rect.top < winHeight * 0.9) {
+                  glowSearchAnimated = true;
+                  glowSearch.classList.add("opacity-100", "translate-x-0", "scale-100");
+                }
+              }
+        
+              if (cartIcon && !cartAnimated) {
+                const rect = cartIcon.getBoundingClientRect();
+                if (rect.top < winHeight * 0.9) {
+                  cartAnimated = true;
+                  setTimeout(() => {
+                    cartIcon.classList.remove("opacity-0", "translate-x-16");
+                    cartIcon.classList.add("opacity-100", "translate-x-0");
+                  }, 300);
+                }
+              }
+        
+              if (glowBrain && !brainAnimated) {
+                const rect = glowBrain.getBoundingClientRect();
+                if (rect.top < winHeight * 0.9) {
+                  brainAnimated = true;
+                  setTimeout(() => {
+                    glowBrain.classList.remove("opacity-0", "-translate-x-16");
+                    glowBrain.classList.add("opacity-100", "translate-x-0");
+                  }, 300);
+                }
+              }
+            });
+          });
+        </script>        
+        
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+            const glowBrain = document.getElementById('glow-brain');
+            if (!glowBrain) return;
+        
+            const observer = new IntersectionObserver(([entry]) => {
+              if (entry.isIntersecting) {
+                glowBrain.classList.add('opacity-100', 'translate-x-0');
+                glowBrain.classList.remove('opacity-0', '-translate-x-16');
+              }
+            }, {
+              threshold: 0.3
+            });
+        
+            observer.observe(glowBrain);
+          });
+        </script>    
+        
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const hamburgerBtn = document.getElementById("hamburger-btn");
+            const mobileMenu = document.getElementById("mobile-menu");
+            const closeMenu = document.getElementById("close-menu");
+            const links = document.querySelectorAll(".mobile-link");
+        
+            // Open menu with fade-in links
+            hamburgerBtn.addEventListener("click", () => {
+              mobileMenu.classList.remove("hidden");
+              links.forEach((link, i) => {
+                link.style.transition = `opacity 0.4s ease ${i * 0.1}s`;
+                setTimeout(() => {
+                  link.style.opacity = "1";
+                }, i * 100);
+              });
+            });
+        
+            function closeMobileMenu() {
+              links.forEach(link => {
+                link.style.transition = "none";
+                link.style.opacity = "0";
+              });
+              mobileMenu.classList.add("hidden");
+            }
+        
+            closeMenu.addEventListener("click", closeMobileMenu);
+        
+            links.forEach(link => {
+              link.addEventListener("click", (e) => {
+                closeMobileMenu();
+        
+                if (link.id === "mobile-login-link") {
+                  setTimeout(() => openPopup('login'), 200);
+                }
+              });
+            });
+          });
+        </script>      
+        
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const mobileGraphic = document.getElementById("mobile-graphic");
+            if (mobileGraphic) {
+              setTimeout(() => {
+                mobileGraphic.classList.add("animate-fade-in-up-bounce");
+              }, 300);
+            }
+          });
+        </script>
+        
+
+        </script>
+          
+    <div id="popup-container"
+         class="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center transition-all duration-300 ease-out opacity-0 scale-95 pointer-events-none">   
+    <div class="bg-[#0b1f16] text-white w-full max-w-md p-8 rounded-2xl shadow-2xl relative">
+      <button id="close-popup" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">×</button>
+      <h2 id="popup-title" class="text-2xl font-bold mb-6 text-green-400">Login</h2>
+  
+      <input id="email" type="email" placeholder="Email"
+             class="w-full p-3 mb-4 rounded bg-black border border-green-500 placeholder-gray-400" />
+      <input id="password" type="password" placeholder="Password"
+             class="w-full p-3 mb-6 rounded bg-black border border-green-500 placeholder-gray-400" />
+  
+      <button id="popup-action"
+              class="w-full bg-green-500 text-black font-semibold py-3 rounded hover:bg-green-400 transition mb-4">
+        Login
+      </button>
+  
+      <div class="text-center text-sm text-gray-400 mb-3">or continue with</div>
+  
+      <button id="google-login" class="w-full flex items-center justify-center gap-2 border border-gray-500 py-2 rounded hover:bg-green-500 hover:text-black transition mb-3">
+        <img src="/static/google-icon.png" class="w-5 h-5" alt="Google" />
+        Google
+      </button>
+  
+      <button id="microsoft-login" class="w-full flex items-center justify-center gap-2 border border-gray-500 py-2 rounded hover:bg-green-500 hover:text-black transition">
+        <img src="/static/microsoft-icon.png" class="w-5 h-5" alt="Microsoft" />
+        Microsoft
+      </button>
+    </div>
+  </div>
+      
+  <div class="hidden md:flex justify-center items-start relative mt-8">
+    <img src="/static/peel-demo.png"
+         alt="Product selected"
+         class="rounded-xl shadow-2xl w-[320px] z-20 relative -mt-12 mr-[-45px]" />
+  
+    <div class="relative z-10 drop-shadow-[0_0_30px_rgba(18,242,95,0.15)]">
+      <img src="/static/peel-demo2.png"
+           alt="Found matches"
+           class="rounded-xl w-[330px] -mt-8" />
+    </div>
+  </div>  
+
+</section>
+
+<div class="h-[60px]"></div>
+
+<section id="glow-search" class="opacity-0 -translate-x-16 transition-all duration-700 ease-out transform scale-90">
+  <div class="h-[80vh] flex items-start pt-42 pl-[10vw] sm:pl-[9vw] pl-[5vw] justify-center sm:justify-start">
+    <div class="relative h-72 w-72 rounded-full bg-[#0f3a2e] flex items-center justify-center shadow-2xl glow-ring">
+      <div class="h-32 w-32 rounded-full bg-[#12f25f33] flex items-center justify-center z-10">
+        <img src="https://img.icons8.com/ios-filled/100/12f25f/search--v1.png" class="h-14 w-14" alt="Search Icon"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="absolute top-[720px] left-1/2 -translate-x-1/2 w-[100vw] max-w-[1200px] h-[1400px] z-0 pointer-events-none">
+  <div class="w-full h-full bg-green-500 opacity-20 blur-[150px] rounded-full"></div>
+</div>
+
+<section id="how-it-works" class="w-full flex justify-center mt-[-340px] sm:mt-[-470px] mt-[-420px] scroll-mt-[210px]">
+  <div class="w-full max-w-screen-xl flex justify-center md:justify-end px-6 md:pr-[10vw] ml-[45px] sm:ml-0">
+    <div class="max-w-2xl text-center mx-auto md:ml-auto md:mr-[-5vw]">
+      <h2 class="text-5xl font-bold text-white mb-6">How it Works</h2>
+      <p class="text-gray-300 text-xl">
+        Tired of manually opening up multiple tabs to compare products? With just a simple search and two clicks, 
+        we'll see if there's matches from eBay and Best Buy for the exact product you want.
+      </p>
+      <p class="text-gray-500 text-sm italic mt-6">
+        Note: As an eBay affiliate, we may earn a commission off qualifying purchases at no cost to you.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<section id="about" class="w-full flex justify-center mt-[530px] sm:mt-[310px] scroll-mt-[250px]">
+  <div class="w-full max-w-screen-xl flex justify-start pl-[10vw] sm:pl-[5vw]">
+    <div class="text-center max-w-2xl sm:ml-0 ml-4">
+      <h2 class="text-5xl font-bold text-white mb-6">About</h2>
+      <p class="text-gray-300 text-xl leading-relaxed pl-6 sm:pl-0">
+        At Peel, we believe online shopping should be simple, fast, and most importantly, transparent. 
+        That's why we built a shopping tool that helps you compare electronics and appliances across 
+        stores like eBay and Best Buy in real time. No more guessing. Match the product where it's best. 
+      </p>
+
+      <section id="vision"
+         class="w-full flex justify-center scroll-mt-[200px] sm:mt-[280px] sm:ml-[38vw] mt-[480px] ml-[15px]">
+    <div class="text-center max-w-3xl mt-28 sm:mt-0">
+    <h2 class="text-5xl font-bold text-white mb-6">Our Vision</h2>
+    <p class="text-gray-300 text-xl leading-relaxed">
+      We believe every product has a better deal somewhere out there and there's savings waiting to be found.
+      The only problem is it takes endless searching to actually find those deals.
+      Our goal is to expand our platform to support more stores and become a place where you can feel confident you're getting the best deal. 
+    </p>
+  </div>
+</section>    
+      
+        <section id="contact" class="w-full flex justify-center px-6 mt-[280px] ml-[2vw] sm:ml-[17vw] scroll-mt-[98px]">
+        <div class="w-full max-w-2xl text-center">
+          <h2 class="text-5xl font-bold text-white mb-6">Contact</h2>
+          <p class="text-gray-300 text-xl mb-10">
+            Help us grow smarter. Your feedback helps shape the future.
+          </p>
+      
+          <form action="https://formsubmit.co/contact.shopwithpeel@gmail.com" method="POST" class="space-y-6">
+            <!-- prevent redirect -->
+            <input type="hidden" name="_redirect" value="https://yourdomain.com#contact" />
+            <!-- remove spam bots -->
+            <input type="text" name="_honey" style="display:none">
+            <!-- disable captcha -->
+            <input type="hidden" name="_captcha" value="false">
+      
+            <input type="text" name="name" placeholder="Your Name" required
+                   class="w-full p-4 rounded bg-black border border-green-500 placeholder-gray-400 focus:ring-2 focus:ring-green-400" />
+      
+            <input type="email" name="email" placeholder="Your Email" required
+                   class="w-full p-4 rounded bg-black border border-green-500 placeholder-gray-400 focus:ring-2 focus:ring-green-400" />
+      
+            <textarea name="message" placeholder="Your Message" rows="5" required
+                      class="w-full p-4 rounded bg-black border border-green-500 placeholder-gray-400 focus:ring-2 focus:ring-green-400"></textarea>
+      
+            <button type="submit"
+                    class="w-full bg-green-500 text-black font-semibold py-3 rounded hover:bg-green-400 transition">
+              Submit
+            </button>
+          </form>
+      </section>      
+
+      <div class="h-10 md:h-0 md:w-20"></div>
+
+      <div id="cart-icon" class="absolute top-[210%] sm:top-[193%] right-[16vw] sm:right-[10vw] opacity-0 translate-x-16 transition-all duration-700 ease-out">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           class="h-72 w-72 opacity-90 drop-shadow-[0_0_10px_#12f25f]" 
+           viewBox="0 0 24 24" 
+           fill="none" 
+           stroke="#12f25f" 
+           stroke-width="2" 
+           stroke-linecap="round" 
+           stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1" />
+        <circle cx="20" cy="21" r="1" />
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+      </svg>
+    </div>  
+  </div>
+    
+  <section id="glow-brain-wrapper" class="relative w-full min-h-[600px] bg-transparent">
+    <div id="glow-brain"
+     class="absolute top-[68vh] sm:top-[54vh] left-[-342px] sm:left-[-51vw] z-[50] opacity-0 -translate-x-16 transition-all duration-1000 ease-out">
+      <img src="/static/brain.png"
+           alt="Brain Icon"
+           class="w-[86vw] h-[86vw] sm:w-[30vw] sm:h-[34vw] max-w-[480px] max-h-[480px] object-contain glow-brain" />
+    </div>
+  </section>  
+
+</section>
+
+<div class="h-32"></div>
+
+<footer class="border-t border-gray-800 w-full py-12 px-8 text-xs text-gray-500 text-center space-y-4 ml-4">
+
+  <div class="flex justify-center mb-2">
+    <a href="https://www.instagram.com/shopwithpeel" target="_blank" rel="noopener noreferrer"
+       class="p-3 rounded-full hover:text-green-400 transition duration-300"
+       title="Follow us on Instagram">
+      <div class="relative flex items-center justify-center">
+        <div class="absolute w-10 h-10 rounded-full bg-green-500 opacity-20 blur-[40px]"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 z-10" viewBox="0 0 24 24">
+          <path d="M7.75 2C4.58 2 2 4.58 2 7.75v8.5C2 19.42 4.58 22 7.75 22h8.5C19.42 22 22 19.42 22 16.25v-8.5C22 4.58 19.42 2 16.25 2h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm5.25-1a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 9.25A2.75 2.75 0 1 0 14.75 12 2.75 2.75 0 0 0 12 9.25z"/>
+        </svg>
+      </div>
+    </a>
+  </div>
+
+  <p class="italic">
+    Peel is currently in beta. Some features are experimental and product results may be limited or inaccurate.
+  </p>
+
+</footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider,
+    OAuthProvider,
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  let auth;
+
+  async function initializeFirebase() {
+    const response = await fetch("/firebase-config");
+    if (!response.ok) throw new Error("Failed to load Firebase config.");
+    const firebaseConfig = await response.json();
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+
+    document.getElementById("login-btn").onclick = () => openPopup("login");
+    document.getElementById("signup-btn").onclick = () => openPopup("signup");
+    document.getElementById("signup-btn-mobile").onclick = () => openPopup("signup");
+    document.getElementById("login-btn-mobile").onclick = () => openPopup("login");
+    document.getElementById("google-login").onclick = () => handleGoogleLogin();
+    document.getElementById("microsoft-login").onclick = () => handleMicrosoftLogin();
+    document.getElementById("popup-action").onclick = () => handleAuthAction();
+    document.getElementById("close-popup").onclick = () => closePopup();
+  }
+
+  initializeFirebase();
+
+  function openPopup(type) {
+  const popup = document.getElementById("popup-container");
+
+  popup.classList.remove("opacity-0", "scale-95", "pointer-events-none");
+  popup.classList.add("opacity-100", "scale-100");
+  
+  document.getElementById("popup-title").innerText = type === "login" ? "Login" : "Create Account";
+  document.getElementById("popup-action").innerText = type === "login" ? "Login" : "Sign Up";
+  document.getElementById("popup-action").onclick = type === "login" ? handleLogin : handleSignup;
+}
+
+function closePopup() {
+  const popup = document.getElementById("popup-container");
+
+  popup.classList.remove("opacity-100", "scale-100");
+  popup.classList.add("opacity-0", "scale-95");
+
+  setTimeout(() => {
+    popup.classList.add("pointer-events-none");
+  }, 300);
+}
+
+  async function handleLogin() {
+    await signInWithEmailAndPassword(auth, email.value, password.value);
+    window.location.href = "/chatbot";
+  }
+
+  async function handleSignup() {
+    await createUserWithEmailAndPassword(auth, email.value, password.value);
+    window.location.href = "/chatbot";
+  }
+
+  async function handleGoogleLogin() {
+    await signInWithPopup(auth, new GoogleAuthProvider());
+    window.location.href = "/chatbot";
+  }
+
+  async function handleMicrosoftLogin() {
+    await signInWithPopup(auth, new OAuthProvider("microsoft.com"));
+    window.location.href = "/chatbot";
+  }
+</script>
+      
+  </body>
+</html>
