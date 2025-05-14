@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discover Products, Compare Prices | Peel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background: black;
+        color: white;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      @keyframes glowIconBounce {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-4px) scale(1.05); }
+      }
+      .animate-glow-icon {
+        box-shadow: 0 0 60px rgba(18, 242, 95, 0.2);
+        animation: glowIconBounce 2s ease-in-out infinite;
+      }
+      .glow-ring {
+        position: relative;
+        z-index: 1;
+      }
+      .glow-ring::before {
+        content: "";
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        border-radius: 9999px;
+        background: radial-gradient(rgba(18, 242, 95, 0.5), rgba(18, 242, 95, 0) 70%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        filter: blur(60px);
+        z-index: -1;
+      }
+      @keyframes subtleBounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+      }
+      .animate-subtle-bounce {
+        animation: subtleBounce 2.5s ease-in-out infinite;
+      }
+      .glow-brain {
+        filter: drop-shadow(0 0 18px #12f25f);
+      }
+      @keyframes fadeInUpBounce {
+        0% { opacity: 0; transform: translateY(60px); }
+        60% { transform: translateY(-6px); }
+        80% { transform: translateY(3px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in-up-bounce {
+        animation: fadeInUpBounce 1.2s ease-out forwards;
+      }
+      body {
+        overflow-x: hidden;
+      }
+      .fade-transition {
+        transition: opacity 0.3s ease;
+      }
+    </style>
+  </head>
+  <body class="text-white font-sans min-h-screen overflow-x-hidden">
+    <header class="relative flex items-center justify-between px-4 sm:px-6 py-4 h-20 overflow-visible border-b border-gray-800">
+      <div class="absolute top-[60%] left-4 sm:top-1/2 sm:left-8 transform -translate-y-[45%]">
+        <img src="/static/peel-logo.png" alt="Peel Beta Logo" class="h-32 sm:h-28 w-auto mx-auto md:mx-0" />
+      </div>
+      <nav class="ml-auto hidden md:flex items-center space-x-6">
+        <a href="#how-it-works" class="text-gray-300 hover:text-green-400">How it Works</a>
+        <a href="#about" class="text-gray-300 hover:text-green-400">About</a>
+        <a href="#vision" class="text-gray-300 hover:text-green-400">Our Vision</a>
+        <a href="#contact" class="text-gray-300 hover:text-green-400">Contact</a>
+        <button id="login-btn" class="bg-green-500 text-black font-semibold px-4 py-2 rounded hover:bg-green-400 transition ml-2">
+          Login
+        </button>
+      </nav>
+      <div class="md:hidden absolute top-6 right-6 z-50">
+        <button id="hamburger-btn" class="text-green-400 text-4xl focus:outline-none">☰</button>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-auto max-h-screen bg-[#121212] z-50 hidden md:hidden shadow-lg overflow-y-auto fade-transition opacity-0">
+      <div class="flex justify-end p-4">
+        <button id="close-menu" class="text-3xl text-white">&times;</button>
+      </div>
+      <nav class="flex flex-col items-center divide-y divide-gray-700">
+        <a href="#how-it-works" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">How it Works</a>
+        <a href="#about" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">About</a>
+        <a href="#vision" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">Our Vision</a>
+        <a href="#contact" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">Contact</a>
+        <a href="javascript:void(0)" id="login-btn-mobile" class="mobile-link text-green-400 font-bold text-xl opacity-0 py-2 w-full text-center">Login</a>
+      </nav>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburgerBtn = document.getElementById("hamburger-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeMenu = document.getElementById("close-menu");
+        const links = document.querySelectorAll(".mobile-link");
+
+        hamburgerBtn.addEventListener("click", () => {
+          mobileMenu.classList.remove("hidden");
+          mobileMenu.classList.add("opacity-100");
+          links.forEach((link, i) => {
+            link.style.transition = `opacity 0.4s ease ${i * 0.1}s`;
+            setTimeout(() => {
+              link.style.opacity = "1";
+            }, i * 100);
+          });
+        });
+
+        closeMenu.addEventListener("click", () => {
+          links.forEach(link => link.style.opacity = "0");
+          mobileMenu.classList.remove("opacity-100");
+          setTimeout(() => {
+            mobileMenu.classList.add("hidden");
+          }, 300);
+        });
+      });
+    </script>
+
+    <section class="flex flex-col-reverse md:flex-row items-center justify-between px-4 sm:px-6 md:px-10 pt-10 pb-24 sm:pt-16 sm:pb-32 md:pt-24 md:pb-36 text-center md:text-left gap-10">
+      <div class="block md:hidden text-center px-4 space-y-6 max-w-[90%] mx-auto mt-[-90px]">
+        <div class="flex justify-center items-center mt-10 w-full">
+          <img src="/static/peel-mobile-graphic.png" alt="Mobile Shopping Graphic" class="w-[280px] sm:w-[340px] max-w-full h-auto drop-shadow-[0_0_40px_#12f25f] animate-fade-in-up-bounce" />
+        </div>
+        <h2 class="text-5xl sm:text-6xl font-extrabold leading-tight tracking-tight">Shop <span class="text-green-400">Smarter</span><br />Match <span class="text-green-400">Better</span></h2>
+        <p class="text-base sm:text-lg text-gray-300 leading-relaxed text-center">
+          Discover the smartest way to find and compare products across<br />stores online — powered by AI.
+        </p>
+        <button id="signup-btn-mobile" class="bg-green-600 text-white text-base px-6 py-3 rounded-xl font-semibold hover:bg-green-400 transition">
+          Create Free Account
+        </button>
+      </div>
+
+      <div class="hidden md:flex flex-col max-w-xl mt-12">
+        <div class="space-y-6">
+          <h2 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
+            Shop <span class="text-green-400">Smarter</span><br />
+            Match <span class="text-green-400">Better</span>
+          </h2>
+          <p class="text-lg md:text-xl text-gray-300">
+            Discover the smartest way to find and compare products across stores online — powered by AI.
+          </p>
+          <button id="signup-btn" class="bg-green-600 text-white px-7 py-3 rounded font-semibold text-lg hover:bg-green-400 transition">
+            Create Free Account
+          </button>
+        </div>
+      </div>
+
+      <div class="hidden md:flex justify-end items-center relative mt-8 w-[50%]">
+        <div class="relative z-20">
+          <img src="/static/peel-demo.png" alt="Product selected" class="rounded-xl shadow-2xl w-[420px] -mt-10" />
+        </div>
+        <div class="relative z-10 -ml-8 drop-shadow-[0_0_30px_rgba(18,242,95,0.15)]">
+          <img src="/static/peel-demo2.png" alt="Found matches" class="rounded-xl w-[400px]" />
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
