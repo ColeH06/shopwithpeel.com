@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compare Prices, Match Products | Peel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="google-site-verification" content="XbDT_Uv6xMSmWwBcGyXiV_6c4GxfolPKvVz0Eg2RRPA" />
+    <meta name="fo-verify" content="bc8e4680-e9d4-43fa-8cd9-e2141fdfd672" />
+    <style>
+      body {
+        background: black;
+        color: white;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      @keyframes glowIconBounce {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-4px) scale(1.05); }
+      }
+      .animate-glow-icon {
+        box-shadow: 0 0 60px rgba(18, 242, 95, 0.2);
+        animation: glowIconBounce 2s ease-in-out infinite;
+      }
+      .glow-ring {
+        position: relative;
+        z-index: 1;
+      }
+      .glow-ring::before {
+        content: "";
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        border-radius: 9999px;
+        background: radial-gradient(rgba(18, 242, 95, 0.5), rgba(18, 242, 95, 0) 70%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        filter: blur(60px);
+        z-index: -1;
+      }
+      @keyframes subtleBounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+      }
+      .animate-subtle-bounce {
+        animation: subtleBounce 2.5s ease-in-out infinite;
+      }
+      .glow-brain {
+        filter: drop-shadow(0 0 18px #12f25f);
+      }
+      @keyframes fadeInUpBounce {
+        0% { opacity: 0; transform: translateY(60px); }
+        60% { transform: translateY(-6px); }
+        80% { transform: translateY(3px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in-up-bounce {
+        animation: fadeInUpBounce 1.2s ease-out forwards;
+      }
+      body {
+        overflow-x: hidden;
+      }
+      .fade-transition {
+        transition: opacity 0.3s ease;
+      }
+
+      @keyframes fadeInFromLeft {
+  0% { opacity: 0; transform: translateX(-60px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInFromRight {
+  0% { opacity: 0; transform: translateX(60px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: all 0.6s ease-out;
+}
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: all 0.6s ease-out;
+}
+.fade-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+    </style>
+  </head>
+  <body class="text-white font-sans min-h-screen overflow-x-hidden">
+    <!-- NAVBAR -->
+    <header class="relative flex items-center justify-between px-4 sm:px-6 py-4 h-20 overflow-visible border-b border-gray-800">
+      <div class="absolute top-[60%] left-4 sm:top-1/2 sm:left-8 transform -translate-y-[45%]">
+        <img src="/static/peel-logo.png" alt="Peel Beta Logo" class="h-32 sm:h-28 w-auto mx-auto md:mx-0" />
+      </div>
+      <nav class="ml-auto hidden md:flex items-center space-x-6">
+        <a href="#how-it-works" class="text-gray-300 hover:text-green-400">How it Works</a>
+        <a href="#about" class="text-gray-300 hover:text-green-400">About</a>
+        <a href="#vision" class="text-gray-300 hover:text-green-400">Our Vision</a>
+        <a href="#contact" class="text-gray-300 hover:text-green-400">Contact</a>
+        <button id="login-btn" class="bg-green-500 text-black font-semibold px-4 py-2 rounded hover:bg-green-400 transition ml-2">
+          Login
+        </button>
+      </nav>
+      <div class="md:hidden absolute top-6 right-6 z-50">
+        <button id="hamburger-btn" class="text-green-400 text-4xl focus:outline-none">☰</button>
+      </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-auto max-h-screen bg-[#121212] z-50 hidden md:hidden shadow-lg overflow-y-auto fade-transition opacity-0">
+      <div class="flex justify-end p-4">
+        <button id="close-menu" class="text-3xl text-white">&times;</button>
+      </div>
+      <nav class="flex flex-col items-center divide-y divide-gray-700">
+        <a href="#how-it-works" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">How it Works</a>
+        <a href="#about" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">About</a>
+        <a href="#vision" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">Our Vision</a>
+        <a href="#contact" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">Contact</a>
+        <a href="javascript:void(0)" id="login-btn-mobile" class="mobile-link text-green-400 font-bold text-xl opacity-0 py-2 w-full text-center">Login</a>
+      </nav>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburgerBtn = document.getElementById("hamburger-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeMenu = document.getElementById("close-menu");
+        const links = document.querySelectorAll(".mobile-link");
+    
+        hamburgerBtn.addEventListener("click", () => {
+          mobileMenu.classList.remove("hidden");
+          mobileMenu.classList.add("opacity-100");
+          links.forEach((link, i) => {
+            link.style.transition = `opacity 0.4s ease ${i * 0.1}s`;
+            setTimeout(() => {
+              link.style.opacity = "1";
+            }, i * 100);
+          });
+        });
+    
+        closeMenu.addEventListener("click", () => {
+          links.forEach(link => link.style.opacity = "0");
+          mobileMenu.classList.remove("opacity-100");
+          setTimeout(() => {
+            mobileMenu.classList.add("hidden");
+          }, 300);
+        });
+    
+        // 🔁 Handle fade-out + smooth scroll on nav click
+        links.forEach(link => {
+          link.addEventListener("click", event => {
+            event.preventDefault();
+    
+            const targetId = link.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+    
+            if (targetElement) {
+              // fade out menu
+              links.forEach(link => link.style.opacity = "0");
+              mobileMenu.classList.remove("opacity-100");
+    
+              setTimeout(() => {
+                mobileMenu.classList.add("hidden");
+                targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+              }, 300); // wait for fade to complete
+            }
+          });
+        });
+      });
+    </script>    
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const fadeInElements = document.querySelectorAll('.fade-in-left, .fade-in-right');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 200); // 1 second delay
+          observer.unobserve(entry.target); // only animate once
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    fadeInElements.forEach(el => observer.observe(el));
+  });
+</script>
+
+    <section class="flex flex-col-reverse md:flex-row items-center justify-between px-4 sm:px-6 md:px-10 pt-32 pb-20 sm:pt-32 sm:pb-28 md:pt-24 md:pb-36 text-center md:text-left gap-10">
+  <div class="block md:hidden text-center px-4 space-y-6 max-w-[90%] mx-auto relative">
+    <div class="flex justify-center items-center w-full -mt-24">
+      <img src="/static/peel-mobile-graphic.png" alt="Mobile Shopping Graphic" class="w-[280px] sm:w-[340px] max-w-full h-auto drop-shadow-[0_0_40px_#12f25f] animate-fade-in-up-bounce" />
+    </div>
+    <div class="relative -top-20 space-y-4">
+      <h2 class="text-5xl sm:text-6xl font-extrabold leading-tight tracking-tight">Shop <span class="text-green-400">Smarter</span><br />Match <span class="text-green-400">Better</span></h2>
+      <p class="text-base sm:text-lg text-gray-300 leading-relaxed text-center">
+        Discover the smartest way to find and compare products across<br />stores online — powered by AI.
+      </p>
+      <button id="signup-btn-mobile" class="bg-green-600 text-white text-base px-6 py-3 rounded-xl font-semibold hover:bg-green-400 transition">
+        Create Free Account
+      </button>
+    </div>
+  </div>
+
+  <div class="hidden md:flex flex-col max-w-xl mt-12">
+    <div class="space-y-6">
+      <h2 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
+        Shop <span class="text-green-400">Smarter</span><br />
+        Match <span class="text-green-400">Better</span>
+      </h2>
+      <p class="text-lg md:text-xl text-gray-300">
+        Discover the smartest way to find and compare products across stores online — powered by AI.
+      </p>
+      <button id="signup-btn" class="bg-green-600 text-white px-7 py-3 rounded font-semibold text-lg hover:bg-green-400 transition">
+        Create Free Account
+      </button>
+    </div>
+  </div>
+
+  <div id="popup-container"
+         class="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center transition-all duration-300 ease-out opacity-0 scale-95 pointer-events-none">   
+    <div class="bg-[#0b1f16] text-white w-full max-w-md p-8 rounded-2xl shadow-2xl relative">
+      <button id="close-popup" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">×</button>
+      <h2 id="popup-title" class="text-2xl font-bold mb-6 text-green-400">Login</h2>
+  
+      <input id="email" type="email" placeholder="Email"
+             class="w-full p-3 mb-4 rounded bg-black border border-green-500 placeholder-gray-400" />
+      <input id="password" type="password" placeholder="Password"
+             class="w-full p-3 mb-6 rounded bg-black border border-green-500 placeholder-gray-400" />
+  
+      <button id="popup-action"
+              class="w-full bg-green-500 text-black font-semibold py-3 rounded hover:bg-green-400 transition mb-4">
+        Login
+      </button>
+  
+      <div class="text-center text-sm text-gray-400 mb-3">or continue with</div>
+  
+      <button id="google-login" class="w-full flex items-center justify-center gap-2 border border-gray-500 py-2 rounded hover:bg-green-500 hover:text-black transition mb-3">
+        <img src="/static/google-icon.png" class="w-5 h-5" alt="Google" />
+        Google
+      </button>
+  
+      <button id="microsoft-login" class="w-full flex items-center justify-center gap-2 border border-gray-500 py-2 rounded hover:bg-green-500 hover:text-black transition">
+        <img src="/static/microsoft-icon.png" class="w-5 h-5" alt="Microsoft" />
+        Microsoft
+      </button>
+    </div>
+  </div>
+
+  <div class="hidden md:flex justify-end items-center relative mt-8 w-[50%]">
+    <div class="relative z-20">
+      <img src="/static/peel-demo.png" alt="Product selected" class="rounded-xl shadow-2xl w-[420px] -mt-10" />
+    </div>
+    <div class="relative z-10 -ml-8 drop-shadow-[0_0_30px_rgba(18,242,95,0.15)]">
+      <img src="/static/peel-demo2.png" alt="Found matches" class="rounded-xl w-[400px]" />
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS SECTION -->
+<section id="how-it-works" class="w-full flex justify-center scroll-mt-[130px] py-24 px-4">
+  <div class="w-full max-w-screen-xl flex flex-col md:flex-row items-center justify-between gap-16">
+    <!-- Icon on left -->
+    <div class="fade-in-left md:w-1/2 w-full flex justify-center md:justify-center">
+      <div class="md:-ml-10">    
+        <div class="h-72 w-72 rounded-full bg-[#0f3a2e] flex items-center justify-center shadow-2xl glow-ring">
+          <div class="h-32 w-32 rounded-full bg-[#12f25f33] flex items-center justify-center z-10">
+            <img src="https://img.icons8.com/ios-filled/100/12f25f/search--v1.png" class="h-14 w-14" alt="Search Icon"/>
+          </div>
+        </div>
+      </div>
+    </div>    
+    <!-- Text on right -->
+    <div class="md:w-1/2 text-center md:text-center">
+      <h2 class="text-5xl font-bold mb-6">How it Works</h2>
+      <p class="text-gray-300 text-xl">
+        Tired of manually opening multiple tabs to compare products? With a simple search and two clicks, we'll see if there are any exact matches from eBay and Best Buy.
+      </p>
+      <p class="text-gray-500 text-sm italic mt-6">
+        Note: As an eBay affiliate, we may earn a commission on qualifying purchases at no cost to you.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="w-full flex justify-center scroll-mt-[100px] py-16 md:py-24 px-4 bg-black">
+  <div class="w-full max-w-screen-xl flex flex-col md:flex-row items-center justify-between gap-16">
+    <!-- 📄 Text (on left for desktop, below cart on mobile) -->
+    <div class="order-2 md:order-1 md:w-1/2 text-center md:text-center">
+      <h2 class="text-5xl font-bold mb-6">About</h2>
+      <p class="text-gray-300 text-xl leading-relaxed">
+        At Peel, we believe online shopping should be simple, fast, and most importantly, transparent. 
+        That's why we built a shopping tool that helps you compare electronics and appliances across 
+        stores like eBay and Best Buy in real time. No more guessing. Match the product where it's best.
+      </p>
+    </div>
+
+    <!-- 🛒 Shopping cart (on right for desktop, above text on mobile) -->
+    <div class="fade-in-right order-1 md:order-2 md:w-1/2 w-full flex justify-center md:justify-start md:pl-28 lg:pl-36 mb-10 md:mb-0">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           class="relative top-6 md:top-0 w-[240px] h-[240px] md:w-[240px] md:h-[240px] lg:w-[260px] lg:h-[260px] drop-shadow-[0_0_28px_#12f25f] mx-auto md:mx-0"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="#12f25f"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1" />
+        <circle cx="20" cy="21" r="1" />
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+      </svg>
+    </div>
+  </div>
+</section>
+
+
+<!-- OUR VISION SECTION -->
+<section id="vision" class="w-full flex justify-center scroll-mt-[70px] py-24 px-4">
+  <div class="w-full max-w-screen-xl flex flex-col md:flex-row items-center justify-between gap-16">
+    <!-- Glow brain image on left -->
+    <div class="fade-in-left md:w-1/2 w-full flex justify-center md:justify-start md:pl-12 lg:pl-16">
+      <img src="/static/brain.png" alt="Glow Brain"
+           class="w-full max-w-[300px] sm:max-w-[320px] md:max-w-[360px] lg:max-w-[380px] object-contain glow-brain" />
+    </div>                   
+    <!-- Text on right -->
+    <div class="md:w-1/2 text-center md:text-center md:pr-4 lg:pr-6">
+      <h2 class="text-5xl font-bold mb-6">Our Vision</h2>
+      <p class="text-gray-300 text-xl">
+        We believe every product has a better deal somewhere out there and there's savings waiting to be found.
+      The only problem is it takes endless searching to actually find those deals.
+      Our goal is to expand our platform to support more stores and become a place where you can feel confident you're getting the best deal. 
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="w-full flex justify-center scroll-mt-[40px] py-24 px-4 bg-black">
+  <div class="w-full max-w-2xl text-center">
+    <h2 class="text-5xl font-bold mb-6">Contact</h2>
+    <p class="text-gray-300 text-xl mb-10">Help us grow smarter. Your feedback shapes Peel’s future.</p>
+    <form action="https://formsubmit.co/contact.shopwithpeel@gmail.com" method="POST" class="space-y-6">
+      <input type="hidden" name="_redirect" value="https://yourdomain.com#contact" />
+      <input type="text" name="_honey" style="display:none" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="text" name="name" placeholder="Your Name" required class="w-full p-4 rounded bg-black border border-green-500 placeholder-gray-400 focus:ring-2 focus:ring-green-400" />
+      <input type="email" name="email" placeholder="Your Email" required class="w-full p-4 rounded bg-black border border-green-500 placeholder-gray-400 focus:ring-2 focus:ring-green-400" />
+      <textarea name="message" placeholder="Your Message" rows="5" required class="w-full p-4 rounded bg-black border border-green-500 placeholder-gray-400 focus:ring-2 focus:ring-green-400"></textarea>
+      <button type="submit" class="w-full bg-green-500 text-black font-semibold py-3 rounded hover:bg-green-400 transition">
+        Submit
+      </button>
+    </form>
+  </div>
+</section>
+
+<div class="h-32"></div>
+
+<footer class="border-t border-gray-800 w-full py-12 px-8 text-xs text-gray-500 text-center space-y-4 ml-4">
+
+
+  <div class="flex justify-center mb-2">
+    <a href="https://www.instagram.com/shopwithpeel" target="_blank" rel="noopener noreferrer"
+       class="p-3 rounded-full hover:text-green-400 transition duration-300"
+       title="Follow us on Instagram">
+      <div class="relative flex items-center justify-center">
+        <div class="absolute w-10 h-10 rounded-full bg-green-500 opacity-20 blur-[40px]"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 z-10" viewBox="0 0 24 24">
+          <path d="M7.75 2C4.58 2 2 4.58 2 7.75v8.5C2 19.42 4.58 22 7.75 22h8.5C19.42 22 22 19.42 22 16.25v-8.5C22 4.58 19.42 2 16.25 2h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm5.25-1a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 9.25A2.75 2.75 0 1 0 14.75 12 2.75 2.75 0 0 0 12 9.25z"/>
+        </svg>
+      </div>
+    </a>
+  </div>
+
+</footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider,
+    OAuthProvider,
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  let auth;
+
+  async function initializeFirebase() {
+    const response = await fetch("/firebase-config");
+    if (!response.ok) throw new Error("Failed to load Firebase config.");
+    const firebaseConfig = await response.json();
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+
+    document.getElementById("login-btn").onclick = () => openPopup("login");
+    document.getElementById("signup-btn").onclick = () => openPopup("signup");
+    document.getElementById("signup-btn-mobile").onclick = () => openPopup("signup");
+    document.getElementById("login-btn-mobile").onclick = () => openPopup("login");
+    document.getElementById("google-login").onclick = () => handleGoogleLogin();
+    document.getElementById("microsoft-login").onclick = () => handleMicrosoftLogin();
+    document.getElementById("close-popup").onclick = () => closePopup();
+  }
+
+  initializeFirebase();
+
+  function openPopup(type) {
+  const popup = document.getElementById("popup-container");
+
+  popup.classList.remove("opacity-0", "scale-95", "pointer-events-none");
+  popup.classList.add("opacity-100", "scale-100");
+  
+  document.getElementById("popup-title").innerText = type === "login" ? "Login" : "Create Account";
+  document.getElementById("popup-action").innerText = type === "login" ? "Login" : "Sign Up";
+  document.getElementById("popup-action").onclick = type === "login" ? handleLogin : handleSignup;
+}
+
+function closePopup() {
+  const popup = document.getElementById("popup-container");
+
+  popup.classList.remove("opacity-100", "scale-100");
+  popup.classList.add("opacity-0", "scale-95");
+
+  setTimeout(() => {
+    popup.classList.add("pointer-events-none");
+  }, 300);
+}
+
+  async function handleLogin() {
+    await signInWithEmailAndPassword(auth, email.value, password.value);
+    window.location.href = "/chatbot";
+  }
+
+  async function handleSignup() {
+    await createUserWithEmailAndPassword(auth, email.value, password.value);
+    window.location.href = "/chatbot";
+  }
+
+  async function handleGoogleLogin() {
+    await signInWithPopup(auth, new GoogleAuthProvider());
+    window.location.href = "/chatbot";
+  }
+
+  async function handleMicrosoftLogin() {
+    await signInWithPopup(auth, new OAuthProvider("microsoft.com"));
+    window.location.href = "/chatbot";
+  }
+</script>
+
+  </body>
+</html>
