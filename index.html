@@ -94,6 +94,37 @@
   transform: translateX(0);
 }
 
+.dollar-3d {
+  text-shadow:
+    2px 2px 0 #e5e5e5,
+    4px 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0.9;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+/* Floating Variants for Motion */
+@keyframes float1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes float3 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.animate-float-1 {
+  animation: float1 4s ease-in-out infinite;
+}
+.animate-float-2 {
+  animation: float2 5s ease-in-out infinite;
+}
+.animate-float-3 {
+  animation: float3 6s ease-in-out infinite;
+}
+
     </style>
   </head>
   <body class="text-white font-sans min-h-screen overflow-x-hidden">
@@ -279,6 +310,18 @@
   </div>
 </div>
 
+<!-- 💲 Floating Dollar Signs -->
+<!-- Top Left Large -->
+<div class="absolute top-0 left-4 text-white text-6xl font-extrabold rotate-[-15deg] animate-float-1 dollar-3d">$</div>
+
+<!-- Top Right Small -->
+<div class="absolute top-4 right-10 text-white text-3xl font-extrabold rotate-[10deg] animate-float-2 dollar-3d">$</div>
+
+<!-- Bottom Left Small -->
+<div class="absolute bottom-6 left-8 text-white text-4xl font-extrabold -rotate-[12deg] animate-float-3 dollar-3d">$</div>
+
+<!-- Bottom Right Medium -->
+<div class="absolute bottom-2 right-4 text-white text-5xl font-extrabold rotate-[8deg] animate-float-1 dollar-3d">$</div>
 </section>
 
 <!-- HOW IT WORKS SECTION -->
