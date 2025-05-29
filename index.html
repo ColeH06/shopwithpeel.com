@@ -126,40 +126,6 @@
 }
 
     </style>
-  </head>
-  <body class="text-white font-sans min-h-screen overflow-x-hidden">
-    <!-- NAVBAR -->
-    <header class="relative flex items-center justify-between px-4 sm:px-6 py-4 h-20 overflow-visible border-b border-gray-800">
-      <div class="absolute top-[60%] left-4 sm:top-1/2 sm:left-8 transform -translate-y-[45%]">
-        <img src="/static/peel-logo.png" alt="Peel Beta Logo" class="h-32 sm:h-28 w-auto mx-auto md:mx-0" />
-      </div>
-      <nav class="ml-auto hidden md:flex items-center space-x-6">
-        <a href="#how-it-works" class="text-gray-300 hover:text-green-400">How it Works</a>
-        <a href="#about" class="text-gray-300 hover:text-green-400">About</a>
-        <a href="#vision" class="text-gray-300 hover:text-green-400">Our Vision</a>
-        <a href="#contact" class="text-gray-300 hover:text-green-400">Contact</a>
-        <button id="login-btn" class="bg-green-500 text-black font-semibold px-4 py-2 rounded hover:bg-green-400 transition ml-2">
-          Login
-        </button>
-      </nav>
-      <div class="md:hidden absolute top-6 right-6 z-50">
-        <button id="hamburger-btn" class="text-green-400 text-4xl focus:outline-none">☰</button>
-      </div>
-    </header>
-
-    <!-- MOBILE MENU -->
-    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-auto max-h-screen bg-[#121212] z-50 hidden md:hidden shadow-lg overflow-y-auto fade-transition opacity-0">
-      <div class="flex justify-end p-4">
-        <button id="close-menu" class="text-3xl text-white">&times;</button>
-      </div>
-      <nav class="flex flex-col items-center divide-y divide-gray-700">
-        <a href="#how-it-works" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">How it Works</a>
-        <a href="#about" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">About</a>
-        <a href="#vision" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">Our Vision</a>
-        <a href="#contact" class="mobile-link text-white text-xl opacity-0 py-2 w-full text-center">Contact</a>
-        <a href="javascript:void(0)" id="login-btn-mobile" class="mobile-link text-green-400 font-bold text-xl opacity-0 py-2 w-full text-center">Login</a>
-      </nav>
-    </div>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
