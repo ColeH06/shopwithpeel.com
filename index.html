@@ -125,6 +125,14 @@
   animation: float3 6s ease-in-out infinite;
 }
 
+@keyframes slowPulse {
+  0%, 100% { transform: scale(1); opacity: 0.08; }
+  50% { transform: scale(1.1); opacity: 0.12; }
+}
+.ambient-glow {
+  animation: slowPulse 16s ease-in-out infinite;
+}
+
 .ambient-glow {
   position: fixed;
   z-index: -10;
