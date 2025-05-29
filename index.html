@@ -125,6 +125,38 @@
   animation: float3 6s ease-in-out infinite;
 }
 
+.ambient-glow {
+  position: fixed;
+  z-index: -10;
+  border-radius: 9999px;
+  pointer-events: none;
+  opacity: 0.08;
+  filter: blur(100px);
+  background: radial-gradient(circle, rgba(18, 242, 95, 0.6), transparent 70%);
+}
+
+.glow-top-left {
+  width: 400px;
+  height: 400px;
+  top: 0;
+  left: 0;
+}
+
+.glow-center-right {
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  right: -150px;
+  transform: translateY(-50%);
+}
+
+.glow-bottom-left {
+  width: 600px;
+  height: 600px;
+  bottom: -200px;
+  left: -100px;
+}
+
     </style>
   </head>
 
@@ -132,6 +164,10 @@
       <div class="absolute top-[60%] left-4 sm:top-1/2 sm:left-8 transform -translate-y-[45%]">
         <img src="/static/peel-logo.png" alt="Peel Beta Logo" class="h-32 sm:h-28 w-auto mx-auto md:mx-0" />
       </div>
+
+      <div class="ambient-glow glow-top-left"></div>
+      <div class="ambient-glow glow-center-right"></div>
+      <div class="ambient-glow glow-bottom-left"></div>
 
     </header>
 
