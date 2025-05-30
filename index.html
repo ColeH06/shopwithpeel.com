@@ -143,32 +143,26 @@
   background: radial-gradient(circle, rgba(18, 242, 95, 0.6), transparent 70%);
 }
 
-@keyframes fadeInRightSmooth {
-  0% {
-    opacity: 0;
-    transform: translateX(60px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.glow-top-left {
+  width: 400px;
+  height: 400px;
+  top: 0;
+  left: 0;
 }
 
-.fade-in-right-icon {
-  opacity: 0;
-  animation: fadeInRightSmooth 1.2s ease-out forwards;
-  animation-delay: 0.3s;
+.glow-center-right {
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  right: -150px;
+  transform: translateY(-50%);
 }
 
-.fade-in-dollar {
-  opacity: 0;
-  animation: fadeIn 1.2s ease-out forwards;
-  animation-delay: 1s;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.glow-bottom-left {
+  width: 600px;
+  height: 600px;
+  bottom: -200px;
+  left: -100px;
 }
 
     </style>
@@ -179,7 +173,6 @@
     <div class="ambient-glow glow-top-left"></div>
     <div class="ambient-glow glow-center-right"></div>
     <div class="ambient-glow glow-bottom-left"></div>
-    <div class="ambient-glow glow-center"></div>
 
     <header class="relative flex items-center justify-between px-4 sm:px-6 py-4 h-20 overflow-visible border-b border-gray-800">
       <div class="absolute top-[60%] left-4 sm:top-1/2 sm:left-8 transform -translate-y-[45%]">
@@ -236,16 +229,6 @@
         });
       });
     </script>    
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const appIcon = document.getElementById('peel-app-icon');
-    if (appIcon) {
-      void appIcon.offsetWidth;
-      appIcon.classList.add('fade-in-right-icon');
-    }
-  });
-</script>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -329,39 +312,38 @@
     </div>
   </div>
 
-<!-- 🍌 Peel App Icon + Dollar Signs -->
+<!-- ✅ Desktop 3D Icon Cluster (Dollar Signs + App Icon) -->
 <div class="hidden md:block relative w-[360px] h-[360px] mt-4 ml-[-24%] -translate-x-[76px] -translate-y-[4px]">
+  <!-- 💲 Floating Dollar Signs -->
+  <div class="absolute top-[5%] left-[12%] text-white text-[42px] font-extrabold animate-float-1 dollar-3d" style="transform: rotate(-25deg);">$</div>
+  <div class="absolute top-[4%] right-[10%] text-white text-[36px] font-extrabold animate-float-2 dollar-3d" style="transform: rotate(20deg);">$</div>
+  <div class="absolute top-[58%] left-[-6%] text-white text-[48px] font-extrabold animate-float-3 dollar-3d" style="transform: rotate(35deg);">$</div>
+  <div class="absolute bottom-[14%] right-[8%] text-white text-[30px] font-extrabold animate-float-2 dollar-3d" style="transform: rotate(-12deg);">$</div>
+  <div class="absolute bottom-[-2%] left-[14%] text-white text-[38px] font-extrabold animate-float-1 dollar-3d" style="transform: rotate(8deg);">$</div>
+  <div class="absolute top-[44%] right-[-6%] text-white text-[44px] font-extrabold animate-float-3 dollar-3d" style="transform: rotate(-30deg);">$</div>
 
-  <!-- App Icon with fade from right -->
-  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-[18deg] hover:rotate-[15deg] transition-all duration-500 ease-in-out scale-[1.4] z-20 fade-in-right-icon-trigger">
+  <!-- 🍌 Peel App Icon -->
+  <div class="hidden md:block">
+  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-[18deg] hover:rotate-[15deg] transition-all duration-500 ease-in-out scale-[1.4]">    <div class="relative w-40 h-40">
     <div class="absolute inset-0 rounded-[1.25rem] z-0">
       <div class="absolute inset-0 bg-[radial-gradient(circle,_rgba(18,242,95,0.95)_0%,_rgba(18,242,95,0.3)_60%,_transparent_100%)] blur-[70px] scale-[1.7] opacity-100"></div>
     </div>      
-    <div class="absolute inset-0 translate-x-2 translate-y-2 bg-green-800 rounded-[1.25rem] z-0 shadow-xl shadow-black/40"></div>
-    <div class="relative z-10 bg-green-500 w-full h-full rounded-[1.25rem] flex items-center justify-center shadow-[inset_0_8px_16px_rgba(255,255,255,0.1),_0_16px_32px_rgba(0,0,0,0.3)]">
-      <img 
-        src="/static/peel-logo2.png" 
-        alt="Peel Logo" 
-        id="peel-app-icon"
-        class="absolute z-30 w-94 h-94 object-contain"
-        style="transform: perspective(600px) rotateX(8deg) rotateY(-15deg) scale(1.05);" />
-      <div class="absolute inset-0 rounded-[1.25rem] bg-gradient-to-tr from-white/40 via-transparent to-transparent z-30 mix-blend-screen pointer-events-none"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,rgba(255,255,255,0.25),transparent_60%)] rounded-[1.25rem] z-20 pointer-events-none mix-blend-screen"></div>
-      <div class="absolute bottom-0 right-0 w-1/2 h-1/2 bg-white/5 rounded-br-[1.25rem] blur-[2px] z-0"></div>
+      <div class="absolute inset-0 translate-x-2 translate-y-2 bg-green-800 rounded-[1.25rem] z-0 shadow-xl shadow-black/40"></div>
+      <div class="relative z-10 bg-green-500 w-full h-full rounded-[1.25rem] flex items-center justify-center shadow-[inset_0_8px_16px_rgba(255,255,255,0.1),_0_16px_32px_rgba(0,0,0,0.3)]">
+        <img 
+          src="/static/peel-logo2.png" 
+          alt="Peel Logo" 
+          class="absolute z-30 w-94 h-94 object-contain"
+          style="transform: perspective(600px) rotateX(8deg) rotateY(-15deg) scale(1.05);" />
+          <div class="absolute inset-0 rounded-[1.25rem] bg-gradient-to-tr from-white/40 via-transparent to-transparent z-30 mix-blend-screen pointer-events-none"></div>
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,rgba(255,255,255,0.25),transparent_60%)] rounded-[1.25rem] z-20 pointer-events-none mix-blend-screen"></div>
+        <div class="absolute bottom-0 right-0 w-1/2 h-1/2 bg-white/5 rounded-br-[1.25rem] blur-[2px] z-0"></div>
+      </div>
     </div>
   </div>
 
-  <!-- Dollar Signs (fade in after delay) -->
-  <div class="opacity-0 animate-[fadeIn_1.4s_ease-out_1.2s_forwards] z-10">
-    <div class="absolute top-[5%] left-[12%] text-white text-[42px] font-extrabold animate-float-1 dollar-3d" style="transform: rotate(-25deg);">$</div>
-    <div class="absolute top-[4%] right-[10%] text-white text-[36px] font-extrabold animate-float-2 dollar-3d" style="transform: rotate(20deg);">$</div>
-    <div class="absolute top-[58%] left-[-6%] text-white text-[48px] font-extrabold animate-float-3 dollar-3d" style="transform: rotate(35deg);">$</div>
-    <div class="absolute bottom-[14%] right-[8%] text-white text-[30px] font-extrabold animate-float-2 dollar-3d" style="transform: rotate(-12deg);">$</div>
-    <div class="absolute bottom-[-2%] left-[14%] text-white text-[38px] font-extrabold animate-float-1 dollar-3d" style="transform: rotate(8deg);">$</div>
-    <div class="absolute top-[44%] right-[-6%] text-white text-[44px] font-extrabold animate-float-3 dollar-3d" style="transform: rotate(-30deg);">$</div>
-  </div>
-
 </div>
+
 
 </section>
 
