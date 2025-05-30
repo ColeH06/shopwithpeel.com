@@ -143,41 +143,6 @@
   background: radial-gradient(circle, rgba(18, 242, 95, 0.6), transparent 70%);
 }
 
-.glow-top-left {
-  position: fixed;
-  top: 40px;
-  left: 20px;
-  width: 400px;
-  height: 400px;
-}
-
-.glow-center-right {
-  position: fixed;
-  top: 50%;
-  right: -100px;
-  width: 500px;
-  height: 500px;
-  transform: translateY(-50%);
-}
-
-.glow-bottom-left {
-  position: fixed;
-  bottom: -120px;
-  left: -80px;
-  width: 600px;
-  height: 600px;
-}
-
-.glow-center {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 700px;
-  height: 700px;
-  transform: translate(-50%, -50%);
-  opacity: 0.06;
-}
-
 @keyframes fadeInRightSmooth {
   0% {
     opacity: 0;
@@ -274,6 +239,15 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    const icon = document.querySelector('.fade-in-right-icon-trigger');
+    if (icon) {
+      icon.classList.add('fade-in-right-icon');
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
     const fadeInElements = document.querySelectorAll('.fade-in-left, .fade-in-right');
 
     const observer = new IntersectionObserver((entries) => {
@@ -358,7 +332,7 @@
 <div class="hidden md:block relative w-[360px] h-[360px] mt-4 ml-[-24%] -translate-x-[76px] -translate-y-[4px]">
 
   <!-- App Icon with fade from right -->
-  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-[18deg] hover:rotate-[15deg] transition-all duration-500 ease-in-out scale-[1.4] z-20 fade-in-right-icon">
+  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-[18deg] hover:rotate-[15deg] transition-all duration-500 ease-in-out scale-[1.4] z-20 fade-in-right-icon-trigger">
     <div class="absolute inset-0 rounded-[1.25rem] z-0">
       <div class="absolute inset-0 bg-[radial-gradient(circle,_rgba(18,242,95,0.95)_0%,_rgba(18,242,95,0.3)_60%,_transparent_100%)] blur-[70px] scale-[1.7] opacity-100"></div>
     </div>      
