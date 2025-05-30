@@ -130,14 +130,49 @@
   50% { transform: scale(1.1); opacity: 0.12; }
 }
 
+@keyframes fadeInFromRight {
+  0% { opacity: 0; transform: translateX(60px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInNormal {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-icon-in {
+  animation: fadeInFromRight 0.8s ease-out forwards;
+}
+
+.animate-dollars-in {
+  animation: fadeInNormal 0.6s ease-out forwards;
+}
+
     </style>
   </head>
 
   <body class="text-white font-sans min-h-screen overflow-x-hidden">
 
-    <div class="ambient-glow glow-top-left"></div>
-    <div class="ambient-glow glow-center-right"></div>
-    <div class="ambient-glow glow-bottom-left"></div>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const iconWrapper = document.getElementById('peel-icon-wrapper');
+        const dollarSigns = document.querySelectorAll('.dollar-3d');
+    
+        // Animate green app icon + Peel logo
+        setTimeout(() => {
+          iconWrapper.classList.add('animate-icon-in');
+        }, 100);
+    
+        // Animate $ signs a moment later
+        setTimeout(() => {
+          dollarSigns.forEach((sign, i) => {
+            sign.style.opacity = 0;
+            sign.style.animation = 'fadeInNormal 0.6s ease-out forwards';
+            sign.style.animationDelay = `${i * 0.1}s`;
+          });
+        }, 900); // slight delay after icon animates
+      });
+    </script>    
 
     <header class="relative flex items-center justify-between px-4 sm:px-6 py-4 h-20 overflow-visible border-b border-gray-800">
       <div class="absolute top-[60%] left-4 sm:top-1/2 sm:left-8 transform -translate-y-[45%]">
@@ -289,7 +324,9 @@
   <div class="absolute top-[44%] right-[-6%] text-white text-[44px] font-extrabold animate-float-3 dollar-3d" style="transform: rotate(-30deg);">$</div>
 
   <!-- 🍌 Peel App Icon -->
-  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-[18deg] hover:rotate-[15deg] transition-all duration-500 ease-in-out scale-[1.4]">    <div class="relative w-40 h-40">
+  <div id="peel-icon-wrapper"
+     class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-[18deg] hover:rotate-[15deg] transition-all duration-500 ease-in-out scale-[1.4] opacity-0">
+    <div class="relative w-40 h-40">
     <div class="absolute inset-0 rounded-[1.25rem] z-0">
       <div class="absolute inset-0 bg-[radial-gradient(circle,_rgba(18,242,95,0.95)_0%,_rgba(18,242,95,0.3)_60%,_transparent_100%)] blur-[70px] scale-[1.7] opacity-100"></div>
     </div>      
