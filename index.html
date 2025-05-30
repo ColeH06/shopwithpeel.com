@@ -178,6 +178,34 @@
   opacity: 0.06;
 }
 
+@keyframes fadeInRightSmooth {
+  0% {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-right-icon {
+  opacity: 0;
+  animation: fadeInRightSmooth 1.2s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+.fade-in-dollar {
+  opacity: 0;
+  animation: fadeIn 1.2s ease-out forwards;
+  animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
     </style>
   </head>
 
@@ -330,16 +358,18 @@
 <div class="hidden md:block relative w-[360px] h-[360px] mt-4 ml-[-24%] -translate-x-[76px] -translate-y-[4px]">
   
   <!-- 💲 Floating Dollar Signs -->
-  <div class="absolute top-[5%] left-[12%] text-white text-[42px] font-extrabold animate-float-1 dollar-3d" style="transform: rotate(-25deg);">$</div>
-  <div class="absolute top-[4%] right-[10%] text-white text-[36px] font-extrabold animate-float-2 dollar-3d" style="transform: rotate(20deg);">$</div>
-  <div class="absolute top-[58%] left-[-6%] text-white text-[48px] font-extrabold animate-float-3 dollar-3d" style="transform: rotate(35deg);">$</div>
-  <div class="absolute bottom-[14%] right-[8%] text-white text-[30px] font-extrabold animate-float-2 dollar-3d" style="transform: rotate(-12deg);">$</div>
-  <div class="absolute bottom-[-2%] left-[14%] text-white text-[38px] font-extrabold animate-float-1 dollar-3d" style="transform: rotate(8deg);">$</div>
-  <div class="absolute top-[44%] right-[-6%] text-white text-[44px] font-extrabold animate-float-3 dollar-3d" style="transform: rotate(-30deg);">$</div>
+  <div class="fade-in-dollar">
+    <div class="absolute top-[5%] left-[12%] text-white text-[42px] font-extrabold animate-float-1 dollar-3d" style="transform: rotate(-25deg);">$</div>
+    <div class="absolute top-[4%] right-[10%] text-white text-[36px] font-extrabold animate-float-2 dollar-3d" style="transform: rotate(20deg);">$</div>
+    <div class="absolute top-[58%] left-[-6%] text-white text-[48px] font-extrabold animate-float-3 dollar-3d" style="transform: rotate(35deg);">$</div>
+    <div class="absolute bottom-[14%] right-[8%] text-white text-[30px] font-extrabold animate-float-2 dollar-3d" style="transform: rotate(-12deg);">$</div>
+    <div class="absolute bottom-[-2%] left-[14%] text-white text-[38px] font-extrabold animate-float-1 dollar-3d" style="transform: rotate(8deg);">$</div>
+    <div class="absolute top-[44%] right-[-6%] text-white text-[44px] font-extrabold animate-float-3 dollar-3d" style="transform: rotate(-30deg);">$</div>
+  </div>  
 
   <!-- 🍌 Peel App Icon -->
   <div class="hidden md:block">
-  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-[18deg] hover:rotate-[15deg] transition-all duration-500 ease-in-out scale-[1.4]">    <div class="relative w-40 h-40">
+  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-[18deg] hover:rotate-[15deg] transition-all duration-500 ease-in-out scale-[1.4] fade-in-right-icon">
     <div class="absolute inset-0 rounded-[1.25rem] z-0">
       <div class="absolute inset-0 bg-[radial-gradient(circle,_rgba(18,242,95,0.95)_0%,_rgba(18,242,95,0.3)_60%,_transparent_100%)] blur-[70px] scale-[1.7] opacity-100"></div>
     </div>      
