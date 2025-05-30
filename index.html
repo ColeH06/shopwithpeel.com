@@ -129,41 +129,6 @@
   0%, 100% { transform: scale(1); opacity: 0.08; }
   50% { transform: scale(1.1); opacity: 0.12; }
 }
-.ambient-glow {
-  animation: slowPulse 16s ease-in-out infinite;
-}
-
-.ambient-glow {
-  position: fixed;
-  z-index: -10;
-  border-radius: 9999px;
-  pointer-events: none;
-  opacity: 0.15;
-  filter: blur(100px);
-  background: radial-gradient(circle, rgba(18, 242, 95, 0.6), transparent 70%);
-}
-
-.glow-top-left {
-  width: 400px;
-  height: 400px;
-  top: 0;
-  left: 0;
-}
-
-.glow-center-right {
-  width: 500px;
-  height: 500px;
-  top: 50%;
-  right: -150px;
-  transform: translateY(-50%);
-}
-
-.glow-bottom-left {
-  width: 600px;
-  height: 600px;
-  bottom: -200px;
-  left: -100px;
-}
 
     </style>
   </head>
@@ -312,9 +277,10 @@
     </div>
   </div>
 
-<!-- ✅ Desktop 3D Icon Cluster (Dollar Signs + App Icon) -->
-<div class="hidden md:block relative w-[360px] h-[360px] mt-4 ml-[-24%] -translate-x-[76px] -translate-y-[4px]">
-  <!-- 💲 Floating Dollar Signs -->
+<!-- 🟢 3D Icon Cluster (Updated) -->
+<div class="relative w-[360px] h-[360px] mt-4 ml-[-24%] -translate-x-[76px] -translate-y-[4px]">
+
+  <!-- 💲 Floating Dollar Signs (Larger + Looser + More Varied) -->
   <div class="absolute top-[5%] left-[12%] text-white text-[42px] font-extrabold animate-float-1 dollar-3d" style="transform: rotate(-25deg);">$</div>
   <div class="absolute top-[4%] right-[10%] text-white text-[36px] font-extrabold animate-float-2 dollar-3d" style="transform: rotate(20deg);">$</div>
   <div class="absolute top-[58%] left-[-6%] text-white text-[48px] font-extrabold animate-float-3 dollar-3d" style="transform: rotate(35deg);">$</div>
@@ -323,7 +289,6 @@
   <div class="absolute top-[44%] right-[-6%] text-white text-[44px] font-extrabold animate-float-3 dollar-3d" style="transform: rotate(-30deg);">$</div>
 
   <!-- 🍌 Peel App Icon -->
-  <div class="hidden md:block">
   <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-[18deg] hover:rotate-[15deg] transition-all duration-500 ease-in-out scale-[1.4]">    <div class="relative w-40 h-40">
     <div class="absolute inset-0 rounded-[1.25rem] z-0">
       <div class="absolute inset-0 bg-[radial-gradient(circle,_rgba(18,242,95,0.95)_0%,_rgba(18,242,95,0.3)_60%,_transparent_100%)] blur-[70px] scale-[1.7] opacity-100"></div>
