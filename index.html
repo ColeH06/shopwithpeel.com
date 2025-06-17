@@ -315,6 +315,22 @@ img {
   });
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeEls = document.querySelectorAll('.fade-in-on-scroll');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeEls.forEach(el => observer.observe(el));
+  });
+</script>
+
 <section class="flex flex-col-reverse md:flex-row items-center justify-between px-4 sm:px-6 md:px-10 pt-32 pb-20 sm:pt-32 sm:pb-28 md:pt-24 md:pb-36 text-center md:text-left gap-10 relative mx-auto">
 
   <div class="block md:hidden text-center px-4 space-y-6 max-w-[90%] mx-auto relative">
