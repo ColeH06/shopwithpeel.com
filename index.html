@@ -257,22 +257,30 @@ img {
       </script>      
 
       <script>
-        const banner = document.getElementById('sticky-banner');
-        const hero = document.querySelector('section.hero');
+        document.addEventListener("DOMContentLoaded", () => {
+          const banner = document.getElementById('sticky-banner');
+          const hero = document.querySelector('section.hero');
       
-        window.addEventListener('scroll', () => {
-          const heroBottom = hero.offsetTop + hero.offsetHeight;
-          const scrolledPastHero = window.scrollY > heroBottom;
+          let showTimer;
       
-          if (scrolledPastHero) {
-            banner.classList.remove('opacity-0', 'pointer-events-none');
-            banner.classList.add('opacity-100');
-          } else {
-            banner.classList.remove('opacity-100');
-            banner.classList.add('opacity-0', 'pointer-events-none');
-          }
+          window.addEventListener('scroll', () => {
+            const heroBottom = hero.offsetTop + hero.offsetHeight;
+            const scrolledPastHero = window.scrollY > heroBottom;
+      
+            clearTimeout(showTimer);
+      
+            if (scrolledPastHero) {
+              showTimer = setTimeout(() => {
+                banner.classList.remove('opacity-0', 'pointer-events-none');
+                banner.classList.add('opacity-100');
+              }, 150); // slight delay
+            } else {
+              banner.classList.remove('opacity-100');
+              banner.classList.add('opacity-0', 'pointer-events-none');
+            }
+          });
         });
-      </script>      
+      </script>         
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
