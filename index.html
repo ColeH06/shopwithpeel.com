@@ -270,10 +270,8 @@ img {
             clearTimeout(showTimer);
       
             if (scrolledPastHero) {
-              showTimer = setTimeout(() => {
-                banner.classList.remove('opacity-0', 'pointer-events-none');
-                banner.classList.add('opacity-100');
-              }, 150);
+              banner.classList.remove('opacity-0', 'pointer-events-none');
+              banner.classList.add('opacity-100');
             } else {
               banner.classList.remove('opacity-100');
               banner.classList.add('opacity-0', 'pointer-events-none');
