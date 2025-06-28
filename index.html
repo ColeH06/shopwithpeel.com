@@ -256,6 +256,24 @@ img {
       }
       </script>      
 
+      <script>
+        const banner = document.getElementById('sticky-banner');
+        const hero = document.querySelector('section.hero');
+      
+        window.addEventListener('scroll', () => {
+          const heroBottom = hero.offsetTop + hero.offsetHeight;
+          const scrolledPastHero = window.scrollY > heroBottom;
+      
+          if (scrolledPastHero) {
+            banner.classList.remove('opacity-0', 'pointer-events-none');
+            banner.classList.add('opacity-100');
+          } else {
+            banner.classList.remove('opacity-100');
+            banner.classList.add('opacity-0', 'pointer-events-none');
+          }
+        });
+      </script>      
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const hamburgerBtn = document.getElementById("hamburger-btn");
@@ -342,7 +360,7 @@ img {
   });
 </script>
 
-<section class="flex flex-col-reverse md:flex-row items-center justify-between px-4 sm:px-6 md:px-10 pt-32 pb-20 sm:pt-32 sm:pb-28 md:pt-24 md:pb-36 text-center md:text-left gap-10 relative mx-auto">
+<section class="hero flex flex-col-reverse md:flex-row items-center justify-between px-4 sm:px-6 md:px-10 pt-32 pb-20 sm:pt-32 sm:pb-28 md:pt-24 md:pb-36 text-center md:text-left gap-10 relative mx-auto">
 
   <div class="block md:hidden text-center px-4 space-y-6 max-w-[90%] mx-auto relative">
     <div class="flex justify-center items-center w-full -mt-24">
@@ -379,6 +397,17 @@ img {
 </a>
     </div>
   </div>
+
+  <div id="sticky-banner" class="fixed top-0 left-0 w-full z-50 bg-black text-white px-6 py-4 flex items-center justify-between transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="flex items-center space-x-2">
+      <img src="/static/peel-logo.png" alt="Peel Logo" class="h-6 w-auto">
+    </div>
+    <a href="https://chromewebstore.google.com/detail/peel-price-comparison-and/googkjkpkhbcofppigjhfgbaeliggnge" target="_blank" rel="noopener noreferrer">
+      <button class="bg-green-500 hover:bg-green-400 text-black font-semibold py-2 px-4 rounded">
+        Start Saving – It's Free
+      </button>
+    </a>
+  </div>  
 
   <div id="popup-container"
          class="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center transition-all duration-300 ease-out opacity-0 scale-95 pointer-events-none">   
