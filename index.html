@@ -273,14 +273,14 @@ img {
               showTimer = setTimeout(() => {
                 banner.classList.remove('opacity-0', 'pointer-events-none');
                 banner.classList.add('opacity-100');
-              }, 150); // slight delay
+              }, 150);
             } else {
               banner.classList.remove('opacity-100');
               banner.classList.add('opacity-0', 'pointer-events-none');
             }
           });
         });
-      </script>         
+      </script>              
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
@@ -406,16 +406,19 @@ img {
     </div>
   </div>
 
-  <div id="sticky-banner" class="fixed top-0 left-0 w-full z-50 bg-black text-white px-6 py-4 flex items-center justify-between transition-opacity duration-300 opacity-0 pointer-events-none">
-    <div class="flex items-center space-x-2">
-      <img src="/static/peel-logo.png" alt="Peel Logo" class="h-6 w-auto">
-    </div>
-    <a href="https://chromewebstore.google.com/detail/peel-price-comparison-and/googkjkpkhbcofppigjhfgbaeliggnge" target="_blank" rel="noopener noreferrer">
-      <button class="bg-green-500 hover:bg-green-400 text-black font-semibold py-2 px-4 rounded">
-        Start Saving – It's Free
-      </button>
-    </a>
-  </div>  
+  <div id="sticky-banner"
+     class="fixed top-0 left-0 w-full z-50 bg-black text-white px-6 py-4 flex items-center justify-between 
+            transition-opacity duration-300 opacity-0 pointer-events-none shadow-md shadow-black/60">
+  <div class="flex items-center space-x-2">
+    <img src="/static/peel-logo.png" alt="Peel Logo" class="h-6 w-auto">
+  </div>
+  <a href="https://chromewebstore.google.com/detail/peel-price-comparison-and/googkjkpkhbcofppigjhfgbaeliggnge"
+     target="_blank" rel="noopener noreferrer">
+    <button class="bg-green-600 text-white text-base px-6 py-3 rounded-xl font-semibold hover:bg-green-400 transition inline-block text-center">
+      Start Saving – It's Free
+    </button>
+  </a>
+</div>  
 
   <div id="popup-container"
          class="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center transition-all duration-300 ease-out opacity-0 scale-95 pointer-events-none">   
