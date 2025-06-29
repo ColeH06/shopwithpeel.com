@@ -572,6 +572,7 @@ class="hidden md:block w-full h-auto object-contain"
       </div>
     </div>
 
+    <div id="reviewSection" class="opacity-0 translate-y-8 transition-all duration-700 ease-out">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-2">
       <!-- Review Card -->
       <div class="bg-white/5 backdrop-blur-md rounded-xl p-6 text-left text-white shadow-lg border border-white/10">
@@ -720,6 +721,25 @@ class="hidden md:block w-full h-auto object-contain"
   </p>  
 
 </footer>
+
+<script>
+  const reviewSection = document.getElementById('reviewSection');
+  let hasAnimated = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasAnimated) {
+        reviewSection.classList.remove('opacity-0', 'translate-y-8');
+        reviewSection.classList.add('opacity-100', 'translate-y-0');
+        hasAnimated = true;
+      }
+    });
+  }, {
+    threshold: 0.3
+  });
+
+  observer.observe(reviewSection);
+</script>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
