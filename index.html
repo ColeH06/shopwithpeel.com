@@ -257,15 +257,13 @@ img {
       </script>   
 
       <script>
-        const params = new URLSearchParams(window.location.search);
-        const ref = params.get("ref");
+        const urlParams = new URLSearchParams(window.location.search);
+        const ref = urlParams.get("ref");
         if (ref) {
           localStorage.setItem("peel_ref", ref);
           console.log("🔗 Referral ID saved:", ref);
-        } else {
-          console.log("ℹ️ No referral ID found in URL");
         }
-      </script>
+      </script>      
 
       <script>
         document.addEventListener("DOMContentLoaded", () => {
