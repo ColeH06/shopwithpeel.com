@@ -262,8 +262,10 @@ img {
         if (ref) {
           localStorage.setItem("peel_ref", ref);
           console.log("🔗 Referral ID saved:", ref);
+        } else {
+          console.log("ℹ️ No referral ID found in URL");
         }
-      </script>             
+      </script>
 
       <script>
         document.addEventListener("DOMContentLoaded", () => {
