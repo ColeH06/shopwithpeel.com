@@ -260,10 +260,11 @@ img {
         const urlParams = new URLSearchParams(window.location.search);
         const ref = urlParams.get("ref");
         if (ref) {
-          localStorage.setItem("peel_ref", ref);
-          console.log("🔗 Referral ID saved:", ref);
+          // Send referral to extension
+          window.postMessage({ type: "PEEL_REFERRAL", ref }, "*");
+          console.log("🔗 Referral ID sent to extension:", ref);
         }
-      </script>      
+      </script>          
 
       <script>
         document.addEventListener("DOMContentLoaded", () => {
