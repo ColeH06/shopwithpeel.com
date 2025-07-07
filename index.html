@@ -254,7 +254,16 @@ img {
         "url": "https://shopwithpeel.com",
         "image": "https://shopwithpeel.com/static/peel-logo.png"
       }
-      </script>      
+      </script>   
+
+      <script>
+        const params = new URLSearchParams(window.location.search);
+        const ref = params.get("ref");
+        if (ref) {
+          localStorage.setItem("peel_ref", ref);
+          console.log("🔗 Referral ID saved:", ref);
+        }
+      </script>             
 
       <script>
         document.addEventListener("DOMContentLoaded", () => {
