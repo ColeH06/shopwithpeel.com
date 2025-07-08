@@ -259,12 +259,14 @@ img {
       <script>
         const urlParams = new URLSearchParams(window.location.search);
         const ref = urlParams.get("ref");
+      
         if (ref) {
-          // Send referral to extension
-          window.postMessage({ type: "PEEL_REFERRAL", ref }, "*");
-          console.log("🔗 Referral ID sent to extension:", ref);
+          setTimeout(() => {
+            window.postMessage({ type: "PEEL_REFERRAL", ref }, "*");
+            console.log("🔗 Referral ID sent to extension:", ref);
+          }, 500);
         }
-      </script>          
+      </script>            
 
       <script>
         document.addEventListener("DOMContentLoaded", () => {
