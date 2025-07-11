@@ -11,11 +11,21 @@
       background-color: #000;
       color: white;
       font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 120px;
+      height: auto;
+    }
+    .center-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      padding: 20px;
     }
     .container {
       background: #111;
@@ -85,41 +95,45 @@
     .thank-you-message.active {
       display: block;
       opacity: 1;
+      text-align: center;
     }
-
-    .logo-wrapper {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
-.logo-wrapper img {
-  height: 60px;
-  width: auto;
-}
-
   </style>
 </head>
 <body>
+  <img src="peel-logo.png" alt="Peel Logo" class="logo" />
 
-    <div class="logo-wrapper">
-        <img src="/static/peel-logo.png" alt="Peel Logo" />
+  <div class="center-wrapper">
+    <div class="container" id="referral-container">
+      <h1>🎉 Congrats, you've installed Peel!<br />One last step.</h1>
+      <p>If you were referred, enter the referral code below to help your friend unlock rewards.</p>
+      <input type="text" id="referral-input" placeholder="Enter referral code (optional)" />
+      <div>
+        <button class="btn btn-primary" onclick="submitReferral()">Submit</button>
+        <button class="btn btn-secondary" onclick="skipReferral()">I wasn't referred</button>
       </div>
-
-  <div class="container" id="referral-container">
-    <h1>🎉 Congrats, you've installed Peel!<br />One last step.
-    </h1>
-    <p>If you were referred, enter the referral code below to help your friend unlock rewards.</p>
-    <input type="text" id="referral-input" placeholder="Enter referral code (optional)" />
-    <div>
-      <button class="btn btn-primary" onclick="submitReferral()">Submit</button>
-      <button class="btn btn-secondary" onclick="skipReferral()">I wasn't referred</button>
     </div>
-  </div>
-  <div class="thank-you-message" id="thank-you-message">
-    Thank you! See you when you start shopping! 🛍️
+
+    <div class="thank-you-message" id="thank-you-message">
+      Thank you! See you when you start shopping! 🛍️
+    </div>
   </div>
 
   <script>
+    // Ensure user_id exists early
+    function ensurePeelUserId() {
+      let userId = localStorage.getItem("peel_user_id");
+      if (!userId) {
+        userId = "user_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
+        localStorage.setItem("peel_user_id", userId);
+        console.log("✅ Generated new peel_user_id:", userId);
+      } else {
+        console.log("🧠 Existing peel_user_id:", userId);
+      }
+      return userId;
+    }
+
+    const userId = ensurePeelUserId();
+
     function fadeOutAndShowThankYou() {
       const container = document.getElementById("referral-container");
       const message = document.getElementById("thank-you-message");
@@ -133,12 +147,11 @@
     function submitReferral() {
       const code = document.getElementById("referral-input").value.trim();
       if (code) {
-        // Send referral code to backend
         fetch("https://peel-extension-backend-1096460939241.us-central1.run.app/submit_referral", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            user_id: localStorage.getItem("peel_user_id"),
+            user_id: userId,
             referral_code: code
           })
         })
