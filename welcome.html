@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Peel</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: #111;
+      padding: 40px;
+      border-radius: 18px;
+      box-shadow: 0 0 20px rgba(0, 255, 128, 0.15);
+      max-width: 500px;
+      text-align: center;
+      transition: opacity 0.6s ease;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+    p {
+      font-size: 14.5px;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+    input[type="text"] {
+      padding: 12px 16px;
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #333;
+      font-size: 16px;
+      background-color: #1a1a1a;
+      color: white;
+      outline: none;
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14.5px;
+      transition: background 0.3s ease;
+    }
+    .btn-primary {
+      background: #32d583;
+      color: #000;
+    }
+    .btn-primary:hover {
+      background: #47e49d;
+    }
+    .btn-secondary {
+      background: #333;
+      color: white;
+    }
+    .btn-secondary:hover {
+      background: #444;
+    }
+    .fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .thank-you-message {
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+      display: none;
+      transition: opacity 0.5s ease;
+    }
+    .thank-you-message.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .logo-wrapper {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.logo-wrapper img {
+  height: 60px;
+  width: auto;
+}
+
+  </style>
+</head>
+<body>
+
+    <div class="logo-wrapper">
+        <img src="/static/peel-logo.png" alt="Peel Logo" />
+      </div>
+
+  <div class="container" id="referral-container">
+    <h1>🎉 Congrats, you've installed Peel!<br />One last step.
+    </h1>
+    <p>If you were referred, enter the referral code below to help your friend unlock rewards.</p>
+    <input type="text" id="referral-input" placeholder="Enter referral code (optional)" />
+    <div>
+      <button class="btn btn-primary" onclick="submitReferral()">Submit</button>
+      <button class="btn btn-secondary" onclick="skipReferral()">I wasn't referred</button>
+    </div>
+  </div>
+  <div class="thank-you-message" id="thank-you-message">
+    Thank you! See you when you start shopping! 🛍️
+  </div>
+
+  <script>
+    function fadeOutAndShowThankYou() {
+      const container = document.getElementById("referral-container");
+      const message = document.getElementById("thank-you-message");
+      container.classList.add("fade-out");
+      setTimeout(() => {
+        container.style.display = "none";
+        message.classList.add("active");
+      }, 600);
+    }
+
+    function submitReferral() {
+      const code = document.getElementById("referral-input").value.trim();
+      if (code) {
+        // Send referral code to backend
+        fetch("https://peel-extension-backend-1096460939241.us-central1.run.app/submit_referral", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user_id: localStorage.getItem("peel_user_id"),
+            referral_code: code
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log("Referral submitted:", data);
+          fadeOutAndShowThankYou();
+        })
+        .catch(err => {
+          console.error("Error submitting referral:", err);
+          fadeOutAndShowThankYou();
+        });
+      } else {
+        fadeOutAndShowThankYou();
+      }
+    }
+
+    function skipReferral() {
+      fadeOutAndShowThankYou();
+    }
+  </script>
+</body>
+</html>
