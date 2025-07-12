@@ -1,3 +1,9 @@
+<script>
+  if (localStorage.getItem("peel_referral_complete") === "true") {
+    window.location.replace("https://shopwithpeel.com");
+  }
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +106,7 @@
   </style>
 </head>
 <body>
-  <img src="/static/peel-logo.png" alt="Peel Logo" class="logo" />
+  <img src="peel-logo.png" alt="Peel Logo" class="logo" />
 
   <div class="center-wrapper">
     <div class="container" id="referral-container">
@@ -132,6 +138,10 @@
       return userId;
     }
 
+    if (localStorage.getItem("peel_referral_complete") === "true") {
+  window.location.href = "https://shopwithpeel.com"; // Or anywhere else
+}
+
     const userId = ensurePeelUserId();
 
     function fadeOutAndShowThankYou() {
@@ -158,10 +168,12 @@
         .then(res => res.json())
         .then(data => {
           console.log("Referral submitted:", data);
+          localStorage.setItem("peel_referral_complete", "true");
           fadeOutAndShowThankYou();
         })
         .catch(err => {
           console.error("Error submitting referral:", err);
+          localStorage.setItem("peel_referral_complete", "true");
           fadeOutAndShowThankYou();
         });
       } else {
@@ -170,6 +182,7 @@
     }
 
     function skipReferral() {
+      localStorage.setItem("peel_referral_complete", "true");
       fadeOutAndShowThankYou();
     }
   </script>
