@@ -841,19 +841,30 @@ function closePopup() {
 
     buttons.forEach(btn => {
       const isSticky = btn.closest("#sticky-cta, .sticky-banner, .floating-cta");
+      if (isSticky) return;
 
-      if (!isSticky) {
-        if (btn.tagName === "BUTTON") {
-          btn.innerText = newLabel; // safe for styled <button>
+      // If it's a <button> directly
+      if (btn.tagName === "BUTTON") {
+        const span = btn.querySelector("span");
+        if (span) {
+          span.textContent = newLabel;
         } else {
-          const innerBtn = btn.querySelector("button");
-          if (innerBtn) innerBtn.innerText = newLabel;
+          btn.innerText = newLabel;
         }
+      }
 
-        // Update link if it's an anchor
-        if (btn.tagName === "A") {
-          btn.href = firefoxUrl;
+      // If it's an <a> that wraps a <button>
+      if (btn.tagName === "A") {
+        const innerBtn = btn.querySelector("button");
+        if (innerBtn) {
+          const span = innerBtn.querySelector("span");
+          if (span) {
+            span.textContent = newLabel;
+          } else {
+            innerBtn.innerText = newLabel;
+          }
         }
+        btn.href = firefoxUrl;
       }
     });
 
