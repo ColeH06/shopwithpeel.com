@@ -830,19 +830,28 @@ function closePopup() {
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const isFirefox = navigator.userAgent.toLowerCase().includes("firefox");
+    if (!isFirefox) return;
 
-    if (isFirefox) {
-      const heroCTA = document.querySelector('section.hero a[href*="chromewebstore.google.com"]');
-      if (heroCTA) {
-        heroCTA.href = "https://addons.mozilla.org/addon/peel-find-better-prices/";
-        heroCTA.textContent = "Add to Firefox – It's Free";
-      }
+    const firefoxUrl = "https://addons.mozilla.org/addon/peel-find-better-prices/";
+    const newLabel = "Add to Firefox – It's Free";
 
-      const reviewCTA = document.querySelector('#reviewSection a[href*="chromewebstore.google.com"]');
-      if (reviewCTA) {
-        reviewCTA.href = "https://addons.mozilla.org/addon/peel-find-better-prices/";
-        reviewCTA.textContent = "Read more reviews on the Firefox Add-ons site →";
-      }
+    const heroBtn = document.querySelector('section.hero a[href*="chromewebstore.google.com"]');
+    if (heroBtn && heroBtn.textContent.includes("Add to Chrome")) {
+      heroBtn.href = firefoxUrl;
+      heroBtn.textContent = newLabel;
+    }
+
+    const reviewBtn = document.querySelector('#reviewSection a[href*="chromewebstore.google.com"]');
+    if (reviewBtn) {
+      reviewBtn.href = firefoxUrl;
+      reviewBtn.textContent = "Read more reviews on the Firefox Add-ons site →";
+    }
+
+    const headlineBtn = Array.from(document.querySelectorAll("a"))
+      .find(a => a.textContent.trim() === "Add to Chrome – It's Free");
+    if (headlineBtn) {
+      headlineBtn.href = firefoxUrl;
+      headlineBtn.textContent = newLabel;
     }
   });
 </script>
