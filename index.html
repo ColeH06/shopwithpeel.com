@@ -835,38 +835,37 @@ function closePopup() {
     const firefoxUrl = "https://addons.mozilla.org/addon/peel-find-better-prices/";
     const newLabel = "Add to Firefox – It's Free";
 
-    const elements = Array.from(document.querySelectorAll("a, button")).filter(el =>
-      el.innerText.trim().includes("Add to Chrome")
-    );
+    const buttons = Array.from(document.querySelectorAll("a, button"))
+      .filter(el => el.textContent.trim() === "Add to Chrome – It's Free");
 
-    elements.forEach(el => {
-      const isSticky = el.closest("#sticky-cta, .sticky-banner, .floating-cta");
+    buttons.forEach(btn => {
+      const isSticky = btn.closest("#sticky-cta, .sticky-banner, .floating-cta");
       if (isSticky) return;
 
-      // Try to find a span or child node with the label
-      const spanChild = Array.from(el.childNodes).find(n =>
-        n.nodeType === 3 || (n.nodeType === 1 && n.innerText?.includes("Add to Chrome"))
-      );
-
-      if (spanChild && spanChild.nodeType === 3) {
-        // Plain text node
-        el.textContent = newLabel;
-      } else if (spanChild && spanChild.nodeType === 1) {
-        // Element node (like span)
-        spanChild.innerText = newLabel;
-      } else {
-        // fallback
-        el.innerText = newLabel;
+      // Case 1: <a> wrapping <button>
+      if (btn.tagName === "A" && btn.querySelector("button")) {
+        const innerBtn = btn.querySelector("button");
+        if (innerBtn) innerBtn.textContent = newLabel;
+        btn.href = firefoxUrl;
+        return;
       }
 
-      if (el.tagName === "A") el.href = firefoxUrl;
+      // Case 2: <button> or <a> with inner <span>
+      const childSpan = btn.querySelector("span");
+      if (childSpan) {
+        childSpan.textContent = newLabel;
+      } else {
+        btn.textContent = newLabel;
+      }
+
+      if (btn.tagName === "A") btn.href = firefoxUrl;
     });
 
-    const reviewBtn = Array.from(document.querySelectorAll("a")).find(el =>
-      el.innerText.includes("Read more reviews")
-    );
+    // Optional: update "Read more reviews" CTA if needed
+    const reviewBtn = Array.from(document.querySelectorAll("a"))
+      .find(el => el.textContent.trim().includes("Read more reviews"));
     if (reviewBtn) {
-      reviewBtn.innerText = "Read more reviews on the Firefox Add-ons site →";
+      reviewBtn.textContent = "Read more reviews on the Firefox Add-ons site →";
       reviewBtn.href = firefoxUrl;
     }
   });
