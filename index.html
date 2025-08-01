@@ -842,12 +842,20 @@ function closePopup() {
       const isSticky = btn.closest("#sticky-cta, .sticky-banner, .floating-cta");
       if (!isSticky) {
         const span = btn.querySelector("span");
+
         if (span) {
-          span.textContent = newLabel;
+          span.textContent = newLabel; // Preserve inner styling
         } else {
           btn.textContent = newLabel;
+          // Re-add class if needed for fallback (optional)
+          if (!btn.className.includes("cta")) {
+            btn.classList.add("cta"); // Replace "cta" with your actual button class if needed
+          }
         }
-        if (btn.tagName === "A") btn.href = firefoxUrl;
+
+        if (btn.tagName === "A") {
+          btn.href = firefoxUrl;
+        }
       }
     });
 
