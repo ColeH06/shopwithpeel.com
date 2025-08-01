@@ -835,16 +835,30 @@ function closePopup() {
     const firefoxUrl = "https://addons.mozilla.org/addon/peel-find-better-prices/";
     const newLabel = "Add to Firefox – It's Free";
 
-    // Match all <a> and <button> that contain the phrase
     const elements = Array.from(document.querySelectorAll("a, button")).filter(el =>
-      el.innerText.includes("Add to Chrome")
+      el.innerText.trim().includes("Add to Chrome")
     );
 
     elements.forEach(el => {
       const isSticky = el.closest("#sticky-cta, .sticky-banner, .floating-cta");
       if (isSticky) return;
 
-      el.innerText = newLabel;
+      // Try to find a span or child node with the label
+      const spanChild = Array.from(el.childNodes).find(n =>
+        n.nodeType === 3 || (n.nodeType === 1 && n.innerText?.includes("Add to Chrome"))
+      );
+
+      if (spanChild && spanChild.nodeType === 3) {
+        // Plain text node
+        el.textContent = newLabel;
+      } else if (spanChild && spanChild.nodeType === 1) {
+        // Element node (like span)
+        spanChild.innerText = newLabel;
+      } else {
+        // fallback
+        el.innerText = newLabel;
+      }
+
       if (el.tagName === "A") el.href = firefoxUrl;
     });
 
