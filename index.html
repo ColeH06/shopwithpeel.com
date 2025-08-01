@@ -842,7 +842,7 @@ function closePopup() {
       const isSticky = btn.closest("#sticky-cta, .sticky-banner, .floating-cta");
       if (isSticky) return;
 
-      // Case 1: <a> wrapping <button>
+      // Case: <a> wrapping <button>
       if (btn.tagName === "A" && btn.querySelector("button")) {
         const innerBtn = btn.querySelector("button");
         if (innerBtn) innerBtn.textContent = newLabel;
@@ -850,7 +850,7 @@ function closePopup() {
         return;
       }
 
-      // Case 2: <button> or <a> with inner <span>
+      // Case: <button> or <a> with span
       const childSpan = btn.querySelector("span");
       if (childSpan) {
         childSpan.textContent = newLabel;
@@ -861,13 +861,10 @@ function closePopup() {
       if (btn.tagName === "A") btn.href = firefoxUrl;
     });
 
-    // Optional: update "Read more reviews" CTA if needed
+    // ❌ Remove reviews link entirely
     const reviewBtn = Array.from(document.querySelectorAll("a"))
       .find(el => el.textContent.trim().includes("Read more reviews"));
-    if (reviewBtn) {
-      reviewBtn.textContent = "Read more reviews on the Firefox Add-ons site →";
-      reviewBtn.href = firefoxUrl;
-    }
+    if (reviewBtn) reviewBtn.remove();
   });
 </script>
 
