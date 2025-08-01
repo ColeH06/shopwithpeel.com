@@ -843,7 +843,12 @@ function closePopup() {
       if (!isSticky) {
         // If there's a span or child element, change that instead of the whole button
         const child = btn.querySelector("span") || btn;
-        child.textContent = newLabel;
+        if (child.tagName === "SPAN") {
+          child.textContent = newLabel;
+       } else {
+         const span = btn.querySelector("span");
+         if (span) span.textContent = newLabel;
+       }
         if (btn.tagName === "A") btn.href = firefoxUrl;
       }
     });
