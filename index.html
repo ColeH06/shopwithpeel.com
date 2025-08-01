@@ -835,44 +835,24 @@ function closePopup() {
     const firefoxUrl = "https://addons.mozilla.org/addon/peel-find-better-prices/";
     const newLabel = "Add to Firefox – It's Free";
 
-    const buttons = Array.from(document.querySelectorAll("a, button")).filter(el =>
-      el.textContent.trim() === "Add to Chrome – It's Free"
+    // Match all <a> and <button> that contain the phrase
+    const elements = Array.from(document.querySelectorAll("a, button")).filter(el =>
+      el.innerText.includes("Add to Chrome")
     );
 
-    buttons.forEach(btn => {
-      const isSticky = btn.closest("#sticky-cta, .sticky-banner, .floating-cta");
+    elements.forEach(el => {
+      const isSticky = el.closest("#sticky-cta, .sticky-banner, .floating-cta");
       if (isSticky) return;
 
-      // If it's a <button> directly
-      if (btn.tagName === "BUTTON") {
-        const span = btn.querySelector("span");
-        if (span) {
-          span.textContent = newLabel;
-        } else {
-          btn.innerText = newLabel;
-        }
-      }
-
-      // If it's an <a> that wraps a <button>
-      if (btn.tagName === "A") {
-        const innerBtn = btn.querySelector("button");
-        if (innerBtn) {
-          const span = innerBtn.querySelector("span");
-          if (span) {
-            span.textContent = newLabel;
-          } else {
-            innerBtn.innerText = newLabel;
-          }
-        }
-        btn.href = firefoxUrl;
-      }
+      el.innerText = newLabel;
+      if (el.tagName === "A") el.href = firefoxUrl;
     });
 
     const reviewBtn = Array.from(document.querySelectorAll("a")).find(el =>
-      el.textContent.trim().includes("Read more reviews")
+      el.innerText.includes("Read more reviews")
     );
     if (reviewBtn) {
-      reviewBtn.textContent = "Read more reviews on the Firefox Add-ons site →";
+      reviewBtn.innerText = "Read more reviews on the Firefox Add-ons site →";
       reviewBtn.href = firefoxUrl;
     }
   });
