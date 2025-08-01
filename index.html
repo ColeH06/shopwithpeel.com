@@ -833,34 +833,26 @@ function closePopup() {
     if (!isFirefox) return;
 
     const firefoxUrl = "https://addons.mozilla.org/addon/peel-find-better-prices/";
-    const firefoxLabel = "Add to Firefox – It's Free";
+    const newLabel = "Add to Firefox – It's Free";
 
-    const buttons = Array.from(document.querySelectorAll("a, button"))
-      .filter(el => {
-        const txt = el.textContent.trim();
-        return txt === "Add to Chrome – It's Free" || txt === "Start Saving – It's Free";
-      });
+    document.querySelectorAll('a[href*="chromewebstore.google.com"]').forEach(link => {
+      const isSticky = link.closest("#sticky-cta, .sticky-banner, .floating-cta");
+      const btn = link.querySelector("button");
 
-    buttons.forEach(btn => {
-      const isSticky = btn.closest("#sticky-cta, .sticky-banner, .floating-cta");
+      // Update the link target for all CTAs
+      link.href = firefoxUrl;
 
-      const wrapper = btn.tagName === "A" ? btn : btn.closest("a");
-      if (wrapper && wrapper.tagName === "A") {
-        wrapper.href = firefoxUrl;
-      }
-
-      // Only change label if not sticky
+      // Change label only for non-sticky CTAs
       if (!isSticky) {
-        const inner = btn.querySelector("span");
-        if (inner) {
-          inner.textContent = firefoxLabel;
+        if (btn) {
+          btn.textContent = newLabel;
         } else {
-          btn.textContent = firefoxLabel;
+          link.textContent = newLabel;
         }
       }
     });
 
-    // ❌ Remove Firefox reviews link
+    // Remove the "Read more reviews" link
     const reviewBtn = Array.from(document.querySelectorAll("a"))
       .find(el => el.textContent.trim().includes("Read more reviews"));
     if (reviewBtn) reviewBtn.remove();
