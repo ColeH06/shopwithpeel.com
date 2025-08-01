@@ -840,9 +840,19 @@ function closePopup() {
 
     buttons.forEach(btn => {
       const isSticky = btn.closest("#sticky-cta, .sticky-banner, .floating-cta");
-      if (isSticky) return;
 
-      // Case: <a> wrapping <button>
+      // Sticky banner: only change link, not label
+      if (isSticky) {
+        const wrapper = isSticky.closest("a");
+        if (wrapper && wrapper.tagName === "A") {
+          wrapper.href = firefoxUrl;
+        } else if (btn.tagName === "A") {
+          btn.href = firefoxUrl;
+        }
+        return;
+      }
+
+      // Regular CTAs: update both label and link
       if (btn.tagName === "A" && btn.querySelector("button")) {
         const innerBtn = btn.querySelector("button");
         if (innerBtn) innerBtn.textContent = newLabel;
@@ -850,7 +860,6 @@ function closePopup() {
         return;
       }
 
-      // Case: <button> or <a> with span
       const childSpan = btn.querySelector("span");
       if (childSpan) {
         childSpan.textContent = newLabel;
