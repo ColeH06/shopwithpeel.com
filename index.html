@@ -141,6 +141,22 @@
   transform: translateX(0);
 }
 
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-right {
+  animation: fadeInRight 0.6s ease-out forwards;
+  opacity: 0;
+}
+
 .dollar-3d {
   text-shadow:
     2px 2px 0 #e5e5e5,
@@ -565,14 +581,13 @@ img {
   </div>
 </section>
 
-<section id="discover-savings" class="w-full flex justify-center scroll-mt-[70px] pt-40 pb-36 px-4 mt-20">
-  <div class="w-full max-w-screen-xl flex flex-col md:flex-row items-center justify-between gap-16">
+<section id="discover-savings" class="w-full flex justify-center scroll-mt-[70px] pt-40 pb-36 mt-20 px-4">
+  <div class="w-full flex flex-col md:flex-row items-center justify-between gap-16">
 
-    <!-- Text on the left -->
     <div class="md:w-1/2 text-center md:text-left md:pl-20 lg:pl-28 md:pr-6 lg:pr-10">
       <h2 class="text-4xl font-bold mb-4">3. Save Instantly</h2>
       <p class="text-gray-300 text-lg mb-6">
-        With a single click, we'll show you better <br>deals so you can compare prices and save money.
+        With a single click, we'll show you better deals so you can compare prices and save money.
       </p>
       <a href="https://chromewebstore.google.com/detail/peel-price-comparison-and/googkjkpkhbcofppigjhfgbaeliggnge"
          target="_blank" rel="noopener noreferrer"
@@ -581,17 +596,16 @@ img {
       </a>
     </div>
 
-    <div class="fade-in-right md:w-1/2 w-full flex justify-center md:justify-center">
-      <div class="relative w-[420px] sm:w-[500px] md:w-[580px] lg:w-[660px] xl:w-[720px] h-auto translate-x-[12px] md:translate-x-[16px] lg:translate-x-[20px]">
-        <img 
-          src="/static/peel-graphic3.png" 
-          alt="Peel Graphic 3"
-          class="w-full h-auto object-contain"
-        />
-      </div>
-    </div>
+    <div class="relative w-[540px] sm:w-[600px] md:w-[680px] lg:w-[760px] xl:w-[820px] translate-x-[10px] md:translate-x-[16px] lg:translate-x-[20px]">
+  <div class="fade-in-right relative w-[540px] sm:w-[600px] md:w-[680px] lg:w-[760px] xl:w-[820px]">
+  <img 
+    src="/static/peel-graphic3.png" 
+    alt="Peel Graphic 3"
+    class="w-full h-auto object-contain translate-x-[10px] md:translate-x-[16px] lg:translate-x-[20px]"
+  />
+</div>
+</div>
 
-  </div>
 </section>
 
 <section class="w-full py-28 px-4 bg-black mt-28">
