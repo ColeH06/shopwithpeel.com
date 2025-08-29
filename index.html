@@ -434,36 +434,39 @@ img {
     </div>
   </div>
 
-  <div class="hidden md:flex flex-col max-w-xl mt-12"></div>
-    <div class="space-y-6">
-      <h2 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight" aria-hidden="true">
-        Shop <span class="text-green-400">Smarter</span><br />
-        Save <span class="text-green-400">Better</span>
-      </h2>
-      <p class="text-lg md:text-xl text-gray-300">
-        Save time and money when you shop on 50,000+ sites<br> online. Peel finds where the best deals are in seconds.
-      </p>
-      <a
-  href="https://chromewebstore.google.com/detail/peel-price-comparison-and/googkjkpkhbcofppigjhfgbaeliggnge"
-  target="_blank" rel="noopener noreferrer"
-  class="bg-[#1e9e54] hover:bg-[#3ccf78] text-white font-semibold
-         text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-md
-         shadow-[0_6px_20px_rgba(30,158,84,0.25)] transition-colors duration-200 inline-block text-center">
-  Add to Chrome – It's Free
-</a>
+  <!-- ✅ FIXED: Left Hero Column Properly Grouped -->
+<div class="hidden md:flex flex-col max-w-xl mt-12 space-y-6">
+  <h2 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight" aria-hidden="true">
+    Shop <span class="text-green-400">Smarter</span><br />
+    Save <span class="text-green-400">Better</span>
+  </h2>
 
-    <!-- ✅ FIXED Trust Badges: aligned + no layout shift -->
-<div class="flex flex-col items-start pt-3">
-  <div class="flex items-center gap-2 mb-1 text-[#2B74FF] font-semibold italic">
-    <img src="/static/verified-google.png" alt="Verified by Google" class="w-4 h-4 object-contain" />
-    Verified by Google
-  </div>
-  <div class="flex items-center gap-2 text-yellow-400 font-semibold italic">
-    <img src="/static/star-icon.png" alt="200+ users" class="w-4 h-4 object-contain" />
-    200+ users saving with Peel
+  <p class="text-lg md:text-xl text-gray-300">
+    Save time and money when you shop on 50,000+ sites<br> online. Peel finds where the best deals are in seconds.
+  </p>
+
+  <a
+    href="https://chromewebstore.google.com/detail/peel-price-comparison-and/googkjkpkhbcofppigjhfgbaeliggnge"
+    target="_blank" rel="noopener noreferrer"
+    class="bg-[#1e9e54] hover:bg-[#3ccf78] text-white font-semibold
+           text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-md
+           shadow-[0_6px_20px_rgba(30,158,84,0.25)] transition-colors duration-200 inline-block text-center">
+    Add to Chrome – It's Free
+  </a>
+
+  <!-- Trust Badges -->
+  <div class="flex flex-col items-start pt-3">
+    <div class="flex items-center gap-2 mb-1 text-[#2B74FF] font-semibold italic">
+      <img src="/static/verified-google.png" alt="Verified by Google" class="w-4 h-4 object-contain" />
+      Verified by Google
+    </div>
+    <div class="flex items-center gap-2 text-yellow-400 font-semibold italic">
+      <img src="/static/star-icon.png" alt="200+ users" class="w-4 h-4 object-contain" />
+      200+ users saving with Peel
+    </div>
   </div>
 </div>
-  </div>
+
 
   <div id="sticky-banner"
      class="fixed top-0 left-0 w-full z-50 bg-black text-white px-6 py-4 flex items-center justify-between 
