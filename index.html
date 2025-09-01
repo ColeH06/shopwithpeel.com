@@ -626,39 +626,41 @@ img {
 
     <h2 class="text-white text-5xl md:text-6xl font-extrabold mb-16">50K+ Stores</h2>
 
-    <div class="relative overflow-hidden w-full h-[280px] bg-black">
-      <div class="logo-track flex gap-16 animate-logo-scroll min-w-max px-[calc(50vw-140px)]">
+    <div class="relative overflow-hidden w-full bg-black">
+      <div class="logo-track flex gap-16 animate-logo-scroll min-w-max">
         <template id="logo-set">
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/amazon.png" alt="Amazon" class="w-28 h-28 object-contain" />
+          <!-- Bubble Start -->
+          <div class="bg-white rounded-full w-[200px] h-[200px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/amazon.png" alt="Amazon" class="w-24 h-24 object-contain" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/target.png" alt="Target" class="w-28 h-28 object-contain" />
+          <div class="bg-white rounded-full w-[200px] h-[200px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/target.png" alt="Target" class="w-24 h-24 object-contain" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/walmart.png" alt="Walmart" class="w-28 h-28 object-contain" />
+          <div class="bg-white rounded-full w-[200px] h-[200px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/walmart.png" alt="Walmart" class="w-24 h-24 object-contain" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/bestbuy.png" alt="Best Buy" class="w-28 h-28 object-contain" />
+          <div class="bg-white rounded-full w-[200px] h-[200px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/bestbuy.png" alt="Best Buy" class="w-24 h-24 object-contain" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/adidas.png" alt="Adidas" class="w-28 h-28 object-contain" />
+          <div class="bg-white rounded-full w-[200px] h-[200px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/adidas.png" alt="Adidas" class="w-24 h-24 object-contain" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/nike.png" alt="Nike" class="w-28 h-28 object-contain" />
+          <div class="bg-white rounded-full w-[200px] h-[200px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/nike.png" alt="Nike" class="w-24 h-24 object-contain" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/sephora.png" alt="Sephora" class="w-28 h-28 object-contain" />
+          <div class="bg-white rounded-full w-[200px] h-[200px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/sephora.png" alt="Sephora" class="w-24 h-24 object-contain" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/nordstrom.png" alt="Nordstrom" class="w-28 h-28 object-contain" />
+          <div class="bg-white rounded-full w-[200px] h-[200px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/nordstrom.png" alt="Nordstrom" class="w-24 h-24 object-contain" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/macys.png" alt="Macy's" class="w-28 h-28 object-contain" />
+          <div class="bg-white rounded-full w-[200px] h-[200px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/macys.png" alt="Macy's" class="w-24 h-24 object-contain" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/saks.png" alt="Saks" class="w-28 h-28 object-contain" />
+          <div class="bg-white rounded-full w-[200px] h-[200px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/saks.png" alt="Saks" class="w-24 h-24 object-contain" />
           </div>
+          <!-- Bubble End -->
         </template>
       </div>
     </div>
@@ -674,14 +676,14 @@ img {
 </script>
 
 <style>
-  @keyframes logo-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
+@keyframes logo-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
-  .animate-logo-scroll {
-    animation: logo-scroll 45s linear infinite;
-  }
+.animate-logo-scroll {
+  animation: logo-scroll 45s linear infinite;
+}
 </style>
 
 <section class="w-full py-28 px-4 bg-black mt-28">
