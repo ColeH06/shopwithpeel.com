@@ -672,6 +672,17 @@ img {
   track.appendChild(template.cloneNode(true));
 </script>
 
+<style>
+@keyframes logo-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-logo-scroll {
+  animation: logo-scroll 20s linear infinite;
+}
+</style>
+
 <section class="w-full py-28 px-4 bg-black mt-28">
   <div class="max-w-6xl mx-auto text-center">
     <h2 class="text-4xl sm:text-5xl font-bold mb-6 text-white">What early users say about Peel</h2>
