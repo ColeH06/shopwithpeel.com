@@ -621,6 +621,65 @@ img {
   </div>
 </section>
 
+<!-- 👇 Add this ABOVE the reviews section -->
+<section class="w-full py-28 px-4 bg-black">
+  <div class="max-w-6xl mx-auto text-center">
+
+    <!-- Big Header -->
+    <h2 class="text-white text-5xl md:text-6xl font-extrabold mb-12">50K+ Stores</h2>
+
+    <!-- Horizontal Scrolling Bubbles -->
+    <div class="relative overflow-hidden w-full h-32">
+      <div class="absolute flex gap-8 animate-scroll-x whitespace-nowrap">
+        <!-- 🔁 Repeat these logos in a loop, add more as needed -->
+        <div class="bg-white/10 rounded-full p-3 w-24 h-24 flex items-center justify-center shadow-md">
+          <img src="/static/logos/amazon.png" alt="Amazon" class="w-12 h-12 object-contain" />
+        </div>
+        <div class="bg-white/10 rounded-full p-3 w-24 h-24 flex items-center justify-center shadow-md">
+          <img src="/static/logos/target.png" alt="Target" class="w-12 h-12 object-contain" />
+        </div>
+        <div class="bg-white/10 rounded-full p-3 w-24 h-24 flex items-center justify-center shadow-md">
+          <img src="/static/logos/walmart.png" alt="Walmart" class="w-12 h-12 object-contain" />
+        </div>
+        <div class="bg-white/10 rounded-full p-3 w-24 h-24 flex items-center justify-center shadow-md">
+          <img src="/static/logos/bestbuy.png" alt="eBay" class="w-12 h-12 object-contain" />
+        </div>
+        <div class="bg-white/10 rounded-full p-3 w-24 h-24 flex items-center justify-center shadow-md">
+          <img src="/static/logos/adidas.png" alt="eBay" class="w-12 h-12 object-contain" />
+        </div>
+        <div class="bg-white/10 rounded-full p-3 w-24 h-24 flex items-center justify-center shadow-md">
+          <img src="/static/logos/nike.png" alt="eBay" class="w-12 h-12 object-contain" />
+        </div>
+        <div class="bg-white/10 rounded-full p-3 w-24 h-24 flex items-center justify-center shadow-md">
+          <img src="/static/logos/sephora.png" alt="eBay" class="w-12 h-12 object-contain" />
+        </div>
+        <div class="bg-white/10 rounded-full p-3 w-24 h-24 flex items-center justify-center shadow-md">
+          <img src="/static/logos/nordstrom.png" alt="eBay" class="w-12 h-12 object-contain" />
+        </div>
+        <div class="bg-white/10 rounded-full p-3 w-24 h-24 flex items-center justify-center shadow-md">
+          <img src="/static/logos/sephora.png" alt="eBay" class="w-12 h-12 object-contain" />
+        </div>
+        <div class="bg-white/10 rounded-full p-3 w-24 h-24 flex items-center justify-center shadow-md">
+          <img src="/static/logos/macys.png" alt="eBay" class="w-12 h-12 object-contain" />
+        </div>
+        <div class="bg-white/10 rounded-full p-3 w-24 h-24 flex items-center justify-center shadow-md">
+          <img src="/static/logos/saks.png" alt="eBay" class="w-12 h-12 object-contain" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+@keyframes scroll-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-scroll-x {
+  animation: scroll-x 60s linear infinite;
+}
+</style>
+
 <section class="w-full py-28 px-4 bg-black mt-28">
   <div class="max-w-6xl mx-auto text-center">
     <h2 class="text-4xl sm:text-5xl font-bold mb-6 text-white">What early users say about Peel</h2>
