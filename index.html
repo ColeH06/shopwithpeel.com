@@ -621,60 +621,56 @@ img {
   </div>
 </section>
 
-<!-- 🔁 BUBBLE CAROUSEL SECTION (Updated Style) -->
 <section class="w-full py-28 px-4 bg-black">
   <div class="max-w-6xl mx-auto text-center">
 
-    <!-- Header -->
     <h2 class="text-white text-5xl md:text-6xl font-extrabold mb-16">50K+ Stores</h2>
 
-    <!-- Logo Bubbles Carousel -->
+    <!-- Carousel -->
     <div class="relative overflow-hidden w-full h-[200px]">
-      <div class="absolute flex gap-10 animate-scroll-x whitespace-nowrap">
-
-        <!-- 🔁 Bubbles (resize for fewer visible) -->
-        <div class="bg-white rounded-full w-[140px] h-[140px] flex items-center justify-center shadow-xl">
-          <img src="/static/logos/amazon.png" alt="Amazon" class="w-16 h-16 object-contain" />
-        </div>
-        <div class="bg-white rounded-full w-[140px] h-[140px] flex items-center justify-center shadow-xl">
-          <img src="/static/logos/target.png" alt="Target" class="w-16 h-16 object-contain" />
-        </div>
-        <div class="bg-white rounded-full w-[140px] h-[140px] flex items-center justify-center shadow-xl">
-          <img src="/static/logos/walmart.png" alt="Walmart" class="w-16 h-16 object-contain" />
-        </div>
-        <div class="bg-white rounded-full w-[140px] h-[140px] flex items-center justify-center shadow-xl">
-          <img src="/static/logos/bestbuy.png" alt="BestBuy" class="w-16 h-16 object-contain" />
-        </div>
-        <div class="bg-white rounded-full w-[140px] h-[140px] flex items-center justify-center shadow-xl">
-          <img src="/static/logos/adidas.png" alt="Adidas" class="w-16 h-16 object-contain" />
-        </div>
-        <div class="bg-white rounded-full w-[140px] h-[140px] flex items-center justify-center shadow-xl">
-          <img src="/static/logos/nike.png" alt="Nike" class="w-16 h-16 object-contain" />
-        </div>
-        <div class="bg-white rounded-full w-[140px] h-[140px] flex items-center justify-center shadow-xl">
-          <img src="/static/logos/sephora.png" alt="Sephora" class="w-16 h-16 object-contain" />
-        </div>
-        <div class="bg-white rounded-full w-[140px] h-[140px] flex items-center justify-center shadow-xl">
-          <img src="/static/logos/macys.png" alt="Macy's" class="w-16 h-16 object-contain" />
-        </div>
-        <div class="bg-white rounded-full w-[140px] h-[140px] flex items-center justify-center shadow-xl">
-          <img src="/static/logos/saks.png" alt="Saks" class="w-16 h-16 object-contain" />
-        </div>
-
+      <div class="logo-track flex gap-10 animate-logo-scroll min-w-max">
+        <!-- One Set -->
+        <template id="logo-set">
+          <div class="bg-white rounded-full w-[160px] h-[160px] flex items-center justify-center shadow-xl">
+            <img src="/static/logos/amazon.png" alt="Amazon" class="w-20 h-20 object-contain" />
+          </div>
+          <div class="bg-white rounded-full w-[160px] h-[160px] flex items-center justify-center shadow-xl">
+            <img src="/static/logos/target.png" alt="Target" class="w-20 h-20 object-contain" />
+          </div>
+          <div class="bg-white rounded-full w-[160px] h-[160px] flex items-center justify-center shadow-xl">
+            <img src="/static/logos/walmart.png" alt="Walmart" class="w-20 h-20 object-contain" />
+          </div>
+          <div class="bg-white rounded-full w-[160px] h-[160px] flex items-center justify-center shadow-xl">
+            <img src="/static/logos/bestbuy.png" alt="Best Buy" class="w-20 h-20 object-contain" />
+          </div>
+          <div class="bg-white rounded-full w-[160px] h-[160px] flex items-center justify-center shadow-xl">
+            <img src="/static/logos/adidas.png" alt="Adidas" class="w-20 h-20 object-contain" />
+          </div>
+          <div class="bg-white rounded-full w-[160px] h-[160px] flex items-center justify-center shadow-xl">
+            <img src="/static/logos/nike.png" alt="Nike" class="w-20 h-20 object-contain" />
+          </div>
+          <div class="bg-white rounded-full w-[160px] h-[160px] flex items-center justify-center shadow-xl">
+            <img src="/static/logos/sephora.png" alt="Sephora" class="w-20 h-20 object-contain" />
+          </div>
+          <div class="bg-white rounded-full w-[160px] h-[160px] flex items-center justify-center shadow-xl">
+            <img src="/static/logos/macys.png" alt="Macy's" class="w-20 h-20 object-contain" />
+          </div>
+          <div class="bg-white rounded-full w-[160px] h-[160px] flex items-center justify-center shadow-xl">
+            <img src="/static/logos/saks.png" alt="Saks" class="w-20 h-20 object-contain" />
+          </div>
+        </template>
       </div>
     </div>
+
   </div>
 </section>
 
-<style>
-@keyframes scroll-x {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.animate-scroll-x {
-  animation: scroll-x 25s linear infinite;
-}
-</style>
+<script>
+  const track = document.querySelector('.logo-track');
+  const template = document.getElementById('logo-set').content;
+  track.appendChild(template.cloneNode(true));
+  track.appendChild(template.cloneNode(true));
+</script>
 
 <section class="w-full py-28 px-4 bg-black mt-28">
   <div class="max-w-6xl mx-auto text-center">
