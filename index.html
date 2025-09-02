@@ -376,6 +376,27 @@ img {
     </script>    
 
 <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const fadeInElements = document.querySelectorAll('.fade-in-left, .fade-in-right');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 200); // 1 second delay
+          observer.unobserve(entry.target); // only animate once
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    fadeInElements.forEach(el => observer.observe(el));
+  });
+</script>
+
+<script>
   document.addEventListener('DOMContentLoaded', () => {
     const fadeEls = document.querySelectorAll('.fade-in-on-scroll');
 
@@ -603,7 +624,7 @@ img {
 <section class="w-full pt-8 pb-20 px-4 bg-black mt-40">
   <div class="max-w-6xl mx-auto text-center">
     
-    <h2 class="text-6xl sm:text-7xl font-extrabold mb-16 text-white">50K+ Stores</h2>
+    <h2 class="text-4xl font-bold mb-6 text-white">50K+ Stores</h2>
 
     <div class="relative overflow-hidden w-full h-[280px]">
       <div class="logo-track flex gap-16 animate-logo-scroll min-w-max px-[calc(50vw-140px)]">
@@ -646,21 +667,10 @@ img {
 </section>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const fadeInElements = document.querySelectorAll('.fade-in-left, .fade-in-right');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          entry.target.style.transitionDelay = `${index * 120}ms`;
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-
-    fadeInElements.forEach(el => observer.observe(el));
-  });
+  const track = document.querySelector('.logo-track');
+  const template = document.getElementById('logo-set').content;
+  track.appendChild(template.cloneNode(true));
+  track.appendChild(template.cloneNode(true));
 </script>
 
 <style>
