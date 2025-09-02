@@ -621,43 +621,43 @@ img {
   </div>
 </section>
 
-<section class="w-full pt-8 pb-20 px-4 bg-black mt-60">
+<section class="w-full pt-8 pb-20 px-4 bg-black mt-40">
   <div class="max-w-6xl mx-auto text-center">
+    
+    <h2 class="text-4xl font-bold mb-6 text-white">50K+ Stores</h2>
 
-    <h2 class="text-white text-6xl md:text-7xl font-extrabold mb-16">50K+ Stores</h2>
-
-    <div class="relative overflow-hidden w-full h-[280px] bg-black">
+    <div class="relative overflow-hidden w-full h-[280px]">
       <div class="logo-track flex gap-16 animate-logo-scroll min-w-max px-[calc(50vw-140px)]">
         <template id="logo-set">
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/amazon.png" alt="Amazon" class="w-28 h-28 object-contain" />
+          <div class="bg-gray-100 rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/amazon.png" alt="Amazon" class="w-28 h-28 object-contain brightness-95 contrast-110" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/target.png" alt="Target" class="w-28 h-28 object-contain" />
+          <div class="bg-gray-100 rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/target.png" alt="Target" class="w-28 h-28 object-contain brightness-95 contrast-110" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/walmart.png" alt="Walmart" class="w-28 h-28 object-contain" />
+          <div class="bg-gray-100 rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/walmart.png" alt="Walmart" class="w-28 h-28 object-contain brightness-95 contrast-110" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/bestbuy.png" alt="Best Buy" class="w-28 h-28 object-contain" />
+          <div class="bg-gray-100 rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/bestbuy.png" alt="Best Buy" class="w-28 h-28 object-contain brightness-95 contrast-110" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/adidas.png" alt="Adidas" class="w-28 h-28 object-contain" />
+          <div class="bg-gray-100 rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/adidas.png" alt="Adidas" class="w-28 h-28 object-contain brightness-95 contrast-110" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/nike.png" alt="Nike" class="w-28 h-28 object-contain" />
+          <div class="bg-gray-100 rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/nike.png" alt="Nike" class="w-28 h-28 object-contain brightness-95 contrast-110" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/sephora.png" alt="Sephora" class="w-28 h-28 object-contain" />
+          <div class="bg-gray-100 rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/sephora.png" alt="Sephora" class="w-28 h-28 object-contain brightness-95 contrast-110" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/nordstrom.png" alt="Nordstrom" class="w-28 h-28 object-contain" />
+          <div class="bg-gray-100 rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/nordstrom.png" alt="Nordstrom" class="w-28 h-28 object-contain brightness-95 contrast-110" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/macys.png" alt="Macy's" class="w-28 h-28 object-contain" />
+          <div class="bg-gray-100 rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/macys.png" alt="Macy's" class="w-28 h-28 object-contain brightness-95 contrast-110" />
           </div>
-          <div class="bg-white rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl">
-            <img src="/static/logos/saks.png" alt="Saks" class="w-28 h-28 object-contain" />
+          <div class="bg-gray-100 rounded-full w-[220px] h-[220px] flex items-center justify-center shadow-xl shrink-0">
+            <img src="/static/logos/saks.png" alt="Saks" class="w-28 h-28 object-contain brightness-95 contrast-110" />
           </div>
         </template>
       </div>
@@ -667,23 +667,10 @@ img {
 </section>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const fadeInElements = document.querySelectorAll('.fade-in-left, .fade-in-right');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          entry.target.style.transitionDelay = `${index * 200}ms`;
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.3
-    });
-
-    fadeInElements.forEach(el => observer.observe(el));
-  });
+  const track = document.querySelector('.logo-track');
+  const template = document.getElementById('logo-set').content;
+  track.appendChild(template.cloneNode(true));
+  track.appendChild(template.cloneNode(true));
 </script>
 
 <style>
