@@ -671,12 +671,13 @@ img {
   const template = document.getElementById('logo-set').content;
   track.appendChild(template.cloneNode(true));
   track.appendChild(template.cloneNode(true));
+  track.appendChild(template.cloneNode(true));
 </script>
 
 <style>
   @keyframes logo-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-33.3333%); }
   }
 
   .animate-logo-scroll {
