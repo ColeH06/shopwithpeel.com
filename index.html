@@ -673,14 +673,12 @@ img {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          entry.target.style.transitionDelay = `${index * 200}ms`;
+          entry.target.style.transitionDelay = `${index * 120}ms`;
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.3
-    });
+    }, { threshold: 0.2 });
 
     fadeInElements.forEach(el => observer.observe(el));
   });
