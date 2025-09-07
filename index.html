@@ -48,6 +48,23 @@
 </script>
 
 <style>
+@keyframes slide-in-right-slow {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right-slow {
+  animation: slide-in-right-slow 1.6s ease-out forwards;
+}
+</style>
+
+<style>
   @keyframes pulse-slow {
     0%, 100% { opacity: 0.25; }
     50% { opacity: 0.4; }
