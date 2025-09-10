@@ -2,46 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sorry to See You Go – Peel</title>
+  <title>We're Sorry to See You Go – Peel</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(ellipse at center, #001f0f 0%, #000 100%);
+      background: radial-gradient(circle at center, #001f0f 0%, #000 100%);
       color: #f5f5f5;
       margin: 0;
-      padding: 0;
+      padding: 2rem;
     }
 
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    .logo {
-      width: 80px;
-      margin-bottom: 1.5rem;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
-      color: #50fa7b;
-    }
-
-    p.subtitle {
-      color: #ccc;
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
       margin-bottom: 2rem;
     }
 
-    form {
-      text-align: left;
-      background: #111;
-      padding: 2rem;
+    .reinstall-btn {
+      background: none;
+      color: #22c55e;
+      font-weight: bold;
+      border: 2px solid #22c55e;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .reinstall-btn:hover {
+      background: #22c55e;
+      color: #000;
+    }
+
+    .form-box {
+      background: #0f172a;
+      padding: 2rem 2.5rem;
       border-radius: 12px;
-      box-shadow: 0 0 12px #00000066;
+      width: 100%;
+      max-width: 620px;
+      margin: 0 auto;
+      box-shadow: 0 0 20px #00000099;
+    }
+
+    h1 {
+      color: #50fa7b;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #ccc;
+      margin-bottom: 2rem;
     }
 
     label {
@@ -52,75 +65,102 @@
 
     input[type="checkbox"] {
       transform: scale(1.2);
-      margin-right: 0.6rem;
+      margin-right: 0.5rem;
     }
 
     textarea {
       width: 100%;
       height: 100px;
-      margin-top: 1rem;
-      padding: 0.75rem;
-      border-radius: 8px;
       border: none;
-      background: #1d1d1d;
-      color: #fff;
+      border-radius: 8px;
+      background: #1e293b;
+      color: white;
+      padding: 0.75rem;
       font-size: 1rem;
+      resize: none;
+      margin-top: 1rem;
     }
 
     button {
-      background: #10b981;
-      color: #000;
-      padding: 0.8rem 1.8rem;
-      border: none;
-      border-radius: 8px;
+      background: #22c55e;
+      color: black;
+      padding: 0.75rem 1.5rem;
       font-weight: bold;
       font-size: 1rem;
+      border: none;
+      border-radius: 8px;
       margin-top: 2rem;
       cursor: pointer;
-      transition: 0.2s ease;
+      transition: background 0.2s ease;
     }
 
     button:hover {
-      background: #059669;
+      background: #16a34a;
     }
 
-    .reinstall {
+    .thank-you {
+      display: none;
+      text-align: center;
       margin-top: 2rem;
-      font-size: 0.95rem;
-    }
-
-    .reinstall a {
-      color: #50fa7b;
-      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <img src="https://shopwithpeel.com/logo.png" alt="Peel Logo" class="logo" />
+  <!-- Top right reinstall button -->
+  <div class="topbar">
+    <a class="reinstall-btn" href="https://chrome.google.com/webstore/detail/googkjkpkhbcofppigjhfgbaeliggnge" target="_blank">+ Reinstall Extension</a>
+  </div>
 
-    <h1>We're Sad to See You Go</h1>
-    <p class="subtitle">Before you go, would you mind telling us why you're uninstalling?</p>
+  <div class="form-box">
+    <h1>We're Sad to See You Go 🍌</h1>
+    <p>Before you uninstall Peel, can you tell us why?</p>
 
-    <form action="https://your-form-handler.com" method="POST">
+    <form id="uninstall-form" action="https://formspree.io/f/myzdojvz" method="POST">
       <label><input type="checkbox" name="reason" value="Didn’t find better prices"> Didn’t find better prices</label>
-      <label><input type="checkbox" name="reason" value="Didn’t show up while shopping"> Peel didn’t show up when I was shopping</label>
+      <label><input type="checkbox" name="reason" value="Didn’t show up while shopping"> Peel didn’t show up while I was shopping</label>
       <label><input type="checkbox" name="reason" value="Didn’t understand how it worked"> Didn’t understand how it worked</label>
-      <label><input type="checkbox" name="reason" value="Too many popups"> Too many popups / overlays</label>
-      <label><input type="checkbox" name="reason" value="Switched to another tool"> I switched to another tool</label>
-      <label><input type="checkbox" name="reason" value="Privacy concerns"> I’m concerned about privacy</label>
+      <label><input type="checkbox" name="reason" value="Too many popups"> Too many popups</label>
+      <label><input type="checkbox" name="reason" value="Switched to another tool"> Switched to another tool</label>
+      <label><input type="checkbox" name="reason" value="Privacy concerns"> Privacy concerns</label>
       <label><input type="checkbox" name="reason" value="Other"> Other:</label>
-
-      <textarea name="feedback" placeholder="Tell us anything else... (optional)"></textarea>
+      <textarea name="additional" placeholder="Any other thoughts? (Optional)"></textarea>
 
       <button type="submit">Submit Feedback</button>
-
-      <div class="reinstall">
-        Changed your mind? <a href="https://chrome.google.com/webstore/detail/googkjkpkhbcofppigjhfgbaeliggnge" target="_blank">Reinstall Peel here</a>
-      </div>
     </form>
+
+    <div class="thank-you" id="thank-you">
+      <h2>Thanks for your feedback!</h2>
+      <p>This tab will now close automatically.</p>
+    </div>
   </div>
+
+  <script>
+    const form = document.getElementById('uninstall-form');
+    const thankYou = document.getElementById('thank-you');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(() => {
+        form.style.display = 'none';
+        thankYou.style.display = 'block';
+        setTimeout(() => {
+          window.close();
+        }, 2000);
+      }).catch(() => {
+        alert("Something went wrong. Please try again.");
+      });
+    });
+  </script>
 
 </body>
 </html>
