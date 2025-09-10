@@ -2,169 +2,148 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Uninstall Peel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --green: #22c55e;
-      --green-dark: #16a34a;
-      --bg-dark: #000;
-      --bg-card: #0f172a;
-      --text-light: #f5f5f5;
-      --text-subtle: #ccc;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
+      background: #000;
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at center, #001f0f 0%, #000 100%);
-      color: var(--text-light);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 2rem 1rem;
+      color: #ffffff;
+      padding: 2rem;
     }
 
     .topbar {
-      width: 100%;
-      max-width: 1000px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      max-width: 1000px;
+      margin: 0 auto 2rem;
     }
 
     .logo img {
-      height: 38px;
+      height: 40px;
     }
 
     .reinstall-btn {
-      background: var(--green);
-      color: #000;
-      padding: 0.5rem 1rem;
-      font-weight: 600;
+      background: #22c55e;
+      color: black;
+      padding: 0.6rem 1rem;
       border: none;
       border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
       text-decoration: none;
-      transition: background 0.2s ease;
     }
 
-    .reinstall-btn:hover {
-      background: var(--green-dark);
-    }
-
-    .form-box {
-      background: var(--bg-card);
-      padding: 2rem 2.5rem;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 620px;
-      box-shadow: 0 0 20px #00000088;
+    .main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding-top: 1rem;
     }
 
     h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
+      font-weight: 700;
       margin-bottom: 0.5rem;
-      color: var(--green);
+    }
+
+    h2 {
+      margin-top: 2rem;
+      font-size: 1.4rem;
+      font-weight: 600;
     }
 
     p {
-      color: var(--text-subtle);
+      color: #e0e0e0;
       margin-bottom: 2rem;
+      font-size: 1rem;
+      max-width: 600px;
     }
 
-    form label {
+    label {
       display: block;
       margin: 1rem 0;
       font-size: 1rem;
+      cursor: pointer;
     }
 
     input[type="checkbox"] {
-      transform: scale(1.2);
       margin-right: 0.6rem;
+      transform: scale(1.1);
     }
 
     textarea {
       width: 100%;
-      height: 100px;
-      margin-top: 1rem;
-      padding: 0.75rem;
-      background: #1e293b;
-      color: #fff;
-      font-size: 1rem;
-      border-radius: 8px;
+      background: #111;
+      color: white;
       border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      padding: 1rem;
+      margin-top: 1rem;
       resize: vertical;
     }
 
     button {
-      margin-top: 2rem;
-      background: var(--green);
-      color: #000;
+      background: #22c55e;
+      color: black;
       font-weight: 600;
       font-size: 1rem;
-      padding: 0.75rem 1.5rem;
+      padding: 0.8rem 1.6rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
+      margin-top: 2rem;
       cursor: pointer;
-      transition: background 0.2s ease;
     }
 
     button:hover {
-      background: var(--green-dark);
+      background: #16a34a;
     }
 
     .thank-you {
       display: none;
-      text-align: center;
       margin-top: 2rem;
     }
 
     @media (max-width: 600px) {
-      .form-box {
-        padding: 1.5rem;
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
       }
 
       h1 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top bar with logo + reinstall button -->
+  <!-- Top bar -->
   <div class="topbar">
     <div class="logo">
-      <img src="https://shopwithpeel.com/logo.png" alt="Peel Logo" />
+      <img src="/static/peel-logo.png" alt="Peel Logo" />
     </div>
     <a class="reinstall-btn" href="https://chrome.google.com/webstore/detail/googkjkpkhbcofppigjhfgbaeliggnge" target="_blank">+ Reinstall Extension</a>
   </div>
 
-  <div class="form-box">
-    <h1>We're Sad to See You Go</h1>
-    <p>Before you uninstall Peel, let us know why. Your feedback helps us improve.</p>
+  <!-- Main content -->
+  <div class="main">
+    <h1>Help us improve</h1>
+    <p>Why did you uninstall Peel? Check all that apply. Your feedback helps us make Peel better.</p>
 
     <form id="uninstall-form" action="https://formspree.io/f/myzdojvz" method="POST">
-      <label><input type="checkbox" name="reason" value="Didn’t find better prices"> Didn’t find better prices</label>
-      <label><input type="checkbox" name="reason" value="Didn’t show up while shopping"> Didn’t show up when I was shopping</label>
-      <label><input type="checkbox" name="reason" value="Didn’t understand how it worked"> Didn’t understand how it worked</label>
-      <label><input type="checkbox" name="reason" value="Too many popups"> Too many popups</label>
-      <label><input type="checkbox" name="reason" value="Switched to another tool"> Switched to another tool</label>
-      <label><input type="checkbox" name="reason" value="Privacy concerns"> Privacy concerns</label>
-      <label><input type="checkbox" name="reason" value="Other"> Other:</label>
+      <label><input type="checkbox" name="reason" value="Didn’t find better prices">Didn’t find better prices</label>
+      <label><input type="checkbox" name="reason" value="Didn’t show up">Didn’t show up while I was shopping</label>
+      <label><input type="checkbox" name="reason" value="Didn’t understand">Didn’t understand how it worked</label>
+      <label><input type="checkbox" name="reason" value="Too many popups">Too many popups</label>
+      <label><input type="checkbox" name="reason" value="Privacy">Privacy concerns</label>
+      <label><input type="checkbox" name="reason" value="Switched">I switched to another tool</label>
+      <label><input type="checkbox" name="reason" value="Other">Other</label>
 
       <textarea name="additional" placeholder="Anything else you'd like to share? (Optional)"></textarea>
 
@@ -172,8 +151,8 @@
     </form>
 
     <div class="thank-you" id="thank-you">
-      <h2>Thanks for your feedback! 🍌</h2>
-      <p>This tab will now close automatically.</p>
+      <h2>Thanks for your feedback!</h2>
+      <p>This tab will close automatically.</p>
     </div>
   </div>
 
@@ -189,15 +168,11 @@
       fetch(form.action, {
         method: "POST",
         body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
       }).then(() => {
         form.style.display = 'none';
         thankYou.style.display = 'block';
-        setTimeout(() => {
-          window.close();
-        }, 2000);
+        setTimeout(() => window.close(), 2000);
       }).catch(() => {
         alert("Something went wrong. Please try again.");
       });
