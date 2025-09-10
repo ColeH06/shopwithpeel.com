@@ -163,11 +163,10 @@
   </div>
 
   <script>
-    // 🔒 Block access unless coming from uninstall flow
-    if (!localStorage.getItem("peel_uninstall_unlock")) {
-      document.body.innerHTML = "";
-      window.close();
-    }
+    const urlParams = new URLSearchParams(window.location.search);
+if (!urlParams.get("uninstall")) {
+  window.location.replace("https://shopwithpeel.com");
+}
 
     const otherRadio = document.getElementById("otherRadio");
     const otherBox = document.getElementById("otherTextContainer");
