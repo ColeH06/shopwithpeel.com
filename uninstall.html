@@ -33,11 +33,10 @@
     /* Peel Logo */
     .logo {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 100px;
+      top: 10px;
+      left: 40px;
+      width: 130px; /* larger logo */
       z-index: 2;
-      transition: opacity 0.6s ease;
     }
 
     /* Topbar */
@@ -51,12 +50,11 @@
       margin-right: auto;
       position: relative;
       z-index: 2;
-      transition: opacity 0.6s ease;
     }
 
     .reinstall-btn {
       background: var(--green);
-      color: #000;
+      color: var(--white);
       padding: 0.6rem 1.2rem;
       border: none;
       border-radius: 6px;
@@ -78,7 +76,6 @@
       text-align: left;
       position: relative;
       z-index: 2;
-      transition: opacity 0.6s ease;
     }
 
     h1 {
@@ -122,7 +119,7 @@
     button {
       margin-top: 2rem;
       background: var(--green);
-      color: #000;
+      color: var(--white);
       font-weight: 600;
       font-size: 1rem;
       padding: 0.8rem 1.6rem;
@@ -136,29 +133,11 @@
       background: var(--green-light);
     }
 
-    /* Thank you message */
-    .thank-you {
-      display: none;
-      text-align: center;
-      margin-top: 3rem;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-
-    .thank-you.show {
-      display: block;
-      opacity: 1;
-    }
-
-    .fade-out {
-      opacity: 0 !important;
-    }
-
     @media (max-width: 600px) {
       .logo {
-        top: 15px;
-        left: 15px;
-        width: 80px;
+        top: 10px;
+        left: 20px;
+        width: 100px;
       }
 
       h1 {
@@ -178,17 +157,17 @@
 <body>
 
   <!-- Peel Logo -->
-  <img src="/static/peel-logo.png" alt="Peel Logo" class="logo" id="logo"/>
+  <img src="/static/peel-logo.png" alt="Peel Logo" class="logo" />
 
   <!-- Reinstall Button -->
-  <div class="topbar" id="topbar">
+  <div class="topbar">
     <a class="reinstall-btn" href="https://chrome.google.com/webstore/detail/googkjkpkhbcofppigjhfgbaeliggnge" target="_blank">
       + Reinstall Extension
     </a>
   </div>
 
   <!-- Main Form -->
-  <div class="main" id="main">
+  <div class="main">
     <h1>Help us improve</h1>
     <p>Why did you uninstall Peel? Check all that apply. Your feedback helps us make it better for everyone.</p>
 
@@ -215,22 +194,17 @@
     </form>
   </div>
 
-  <!-- Thank you -->
-  <div class="thank-you" id="thank-you">
-    <h2>Thanks for your feedback!</h2>
-    <p>This tab will close automatically.</p>
-  </div>
-
   <!-- JS -->
   <script>
     const form = document.getElementById('uninstall-form');
-    const thankYou = document.getElementById('thank-you');
     const otherCheckbox = document.getElementById('other-checkbox');
     const otherTextboxWrapper = document.getElementById('other-textbox-wrapper');
     const otherTextbox = document.getElementById('other-textbox');
-    const logo = document.getElementById('logo');
-    const topbar = document.getElementById('topbar');
-    const main = document.getElementById('main');
+
+    // Prevent users from accessing uninstall page directly
+    if (document.referrer === "" || !document.referrer.includes("chrome-extension://")) {
+      window.location.href = "https://shopwithpeel.com";
+    }
 
     // Toggle "Other" textarea visibility + required state
     otherCheckbox.addEventListener('change', () => {
@@ -255,21 +229,11 @@
         body: formData,
         headers: { 'Accept': 'application/json' }
       }).then(() => {
-        // Fade everything out
-        logo.classList.add('fade-out');
-        topbar.classList.add('fade-out');
-        main.classList.add('fade-out');
-
-        // After fade, show thank you
-        setTimeout(() => {
-          thankYou.classList.add('show');
-        }, 600);
-
-        // Try closing the tab, fallback to homepage redirect
+        // Close immediately
         setTimeout(() => {
           window.close();
-          window.location.href = "https://shopwithpeel.com"; 
-        }, 3000);
+          window.location.href = "https://shopwithpeel.com";
+        }, 500);
       }).catch(() => {
         alert("Something went wrong. Please try again.");
       });
