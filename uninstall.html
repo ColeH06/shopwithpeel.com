@@ -8,7 +8,7 @@
   <style>
     :root {
       --green: #22c55e;
-      --green-light: #4ade80; /* lighter green for hover */
+      --green-light: #4ade80;
       --gray-light: #d4d4d4;
       --white: #ffffff;
       --bg-dark: #000;
@@ -26,9 +26,8 @@
       font-family: 'Inter', sans-serif;
       color: var(--white);
       padding: 2rem 1.5rem 4rem;
-      position: relative;
-      overflow-x: hidden;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* Peel Logo */
@@ -38,6 +37,7 @@
       left: 20px;
       width: 100px;
       z-index: 2;
+      transition: opacity 0.6s ease;
     }
 
     /* Topbar */
@@ -51,6 +51,7 @@
       margin-right: auto;
       position: relative;
       z-index: 2;
+      transition: opacity 0.6s ease;
     }
 
     .reinstall-btn {
@@ -77,6 +78,7 @@
       text-align: left;
       position: relative;
       z-index: 2;
+      transition: opacity 0.6s ease;
     }
 
     h1 {
@@ -134,21 +136,22 @@
       background: var(--green-light);
     }
 
+    /* Thank you message */
     .thank-you {
       display: none;
       text-align: center;
       margin-top: 3rem;
-      animation: fadeIn 0.4s ease;
+      opacity: 0;
+      transition: opacity 0.6s ease;
     }
 
-    .thank-you h2 {
-      font-size: 1.5rem;
-      color: var(--green-light);
+    .thank-you.show {
+      display: block;
+      opacity: 1;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .fade-out {
+      opacity: 0 !important;
     }
 
     @media (max-width: 600px) {
@@ -175,17 +178,17 @@
 <body>
 
   <!-- Peel Logo -->
-  <img src="/static/peel-logo.png" alt="Peel Logo" class="logo" />
+  <img src="/static/peel-logo.png" alt="Peel Logo" class="logo" id="logo"/>
 
   <!-- Reinstall Button -->
-  <div class="topbar">
+  <div class="topbar" id="topbar">
     <a class="reinstall-btn" href="https://chrome.google.com/webstore/detail/googkjkpkhbcofppigjhfgbaeliggnge" target="_blank">
       + Reinstall Extension
     </a>
   </div>
 
   <!-- Main Form -->
-  <div class="main">
+  <div class="main" id="main">
     <h1>Help us improve</h1>
     <p>Why did you uninstall Peel? Check all that apply. Your feedback helps us make it better for everyone.</p>
 
@@ -210,11 +213,12 @@
 
       <button type="submit">Submit Feedback</button>
     </form>
+  </div>
 
-    <div class="thank-you" id="thank-you">
-      <h2>Thanks for your feedback!</h2>
-      <p>This tab will close automatically.</p>
-    </div>
+  <!-- Thank you -->
+  <div class="thank-you" id="thank-you">
+    <h2>Thanks for your feedback!</h2>
+    <p>This tab will close automatically.</p>
   </div>
 
   <!-- JS -->
@@ -224,6 +228,9 @@
     const otherCheckbox = document.getElementById('other-checkbox');
     const otherTextboxWrapper = document.getElementById('other-textbox-wrapper');
     const otherTextbox = document.getElementById('other-textbox');
+    const logo = document.getElementById('logo');
+    const topbar = document.getElementById('topbar');
+    const main = document.getElementById('main');
 
     // Toggle "Other" textarea visibility + required state
     otherCheckbox.addEventListener('change', () => {
@@ -248,9 +255,21 @@
         body: formData,
         headers: { 'Accept': 'application/json' }
       }).then(() => {
-        form.style.display = 'none';
-        thankYou.style.display = 'block';
-        setTimeout(() => window.close(), 2000);
+        // Fade everything out
+        logo.classList.add('fade-out');
+        topbar.classList.add('fade-out');
+        main.classList.add('fade-out');
+
+        // After fade, show thank you
+        setTimeout(() => {
+          thankYou.classList.add('show');
+        }, 600);
+
+        // Try closing the tab, fallback to homepage redirect
+        setTimeout(() => {
+          window.close();
+          window.location.href = "https://shopwithpeel.com"; 
+        }, 3000);
       }).catch(() => {
         alert("Something went wrong. Please try again.");
       });
