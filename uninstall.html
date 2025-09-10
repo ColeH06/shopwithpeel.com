@@ -20,7 +20,7 @@
 
     body {
       margin: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(34,197,94,0.2), transparent 40%),
+      background: radial-gradient(circle at 30% 30%, rgba(34,197,94,0.25), transparent 40%),
                   radial-gradient(circle at 70% 70%, rgba(34,197,94,0.15), transparent 40%),
                   #000;
       font-family: 'Inter', sans-serif;
@@ -33,9 +33,9 @@
     /* Peel Logo */
     .logo {
       position: absolute;
-      top: 10px;
-      left: 40px;
-      width: 130px; /* larger logo */
+      top: 20px;
+      left: 60px;
+      width: 150px;
       z-index: 2;
     }
 
@@ -62,11 +62,11 @@
       font-size: 0.95rem;
       cursor: pointer;
       text-decoration: none;
-      transition: background 0.2s ease;
+      transition: filter 0.2s ease;
     }
 
     .reinstall-btn:hover {
-      background: var(--green-light);
+      filter: brightness(1.2);
     }
 
     /* Main content */
@@ -126,11 +126,11 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: background 0.2s ease;
+      transition: filter 0.2s ease;
     }
 
     button:hover {
-      background: var(--green-light);
+      filter: brightness(1.2);
     }
 
     @media (max-width: 600px) {
@@ -167,7 +167,7 @@
   </div>
 
   <!-- Main Form -->
-  <div class="main">
+  <div class="main" id="form-container">
     <h1>We're sad to see you go</h1>
     <p>Why did you uninstall Peel? Your feedback helps us grow smarter.</p>
 
@@ -200,13 +200,14 @@
     const otherCheckbox = document.getElementById('other-checkbox');
     const otherTextboxWrapper = document.getElementById('other-textbox-wrapper');
     const otherTextbox = document.getElementById('other-textbox');
+    const container = document.getElementById('form-container');
 
-    // Prevent users from accessing uninstall page directly
+    // Block direct URL access
     if (document.referrer === "" || !document.referrer.includes("chrome-extension://")) {
       window.location.href = "https://shopwithpeel.com";
     }
 
-    // Toggle "Other" textarea visibility + required state
+    // Show/hide "Other" textarea
     otherCheckbox.addEventListener('change', () => {
       if (otherCheckbox.checked) {
         otherTextboxWrapper.style.display = 'block';
@@ -218,10 +219,9 @@
       }
     });
 
-    // Form submission
+    // On submit: fade out then close tab
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-
       const formData = new FormData(form);
 
       fetch(form.action, {
@@ -229,11 +229,11 @@
         body: formData,
         headers: { 'Accept': 'application/json' }
       }).then(() => {
-        // Close immediately
+        container.style.transition = "opacity 0.7s ease";
+        container.style.opacity = 0;
         setTimeout(() => {
           window.close();
-          window.location.href = "https://shopwithpeel.com";
-        }, 500);
+        }, 800);
       }).catch(() => {
         alert("Something went wrong. Please try again.");
       });
