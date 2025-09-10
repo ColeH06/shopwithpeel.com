@@ -36,10 +36,10 @@
     }
 
     .logo {
-      width: 80px;
+      width: 65px;
       position: absolute;
-      top: 15px;
-      left: 20px;
+      top: 10px;
+      left: 15px;
     }
 
     h1 {
@@ -73,9 +73,12 @@
       width: 100%;
       padding: 10px;
       font-size: 15px;
+      font-family: 'Segoe UI', sans-serif;
       border-radius: 6px;
       border: none;
       resize: vertical;
+      background-color: #fff;
+      color: #000;
     }
 
     .buttons {
@@ -83,7 +86,7 @@
     }
 
     button {
-      background-color: #0c7c3d;
+      background-color: #075e2e;
       border: none;
       padding: 12px 24px;
       font-size: 16px;
@@ -95,14 +98,14 @@
     }
 
     button:hover {
-      background-color: #12b45c;
+      background-color: #0f9c4a;
     }
 
     .reinstall {
       position: absolute;
-      top: 25px;
-      right: 40px;
-      background-color: #0c7c3d;
+      top: 20px;
+      right: 30px;
+      background-color: #075e2e;
       padding: 10px 18px;
       border-radius: 8px;
       font-weight: bold;
@@ -112,7 +115,7 @@
     }
 
     .reinstall:hover {
-      background-color: #12b45c;
+      background-color: #0f9c4a;
     }
 
     .fade-out {
@@ -170,19 +173,23 @@
       window.close(); // try to close tab
     }
 
-    // ✅ Show/hide other textbox
+    // ✅ Show/hide "Other" text field
     document.getElementById("otherCheckbox").addEventListener("change", function () {
       const otherBox = document.getElementById("otherTextContainer");
       otherBox.style.display = this.checked ? "block" : "none";
     });
 
-    // ✅ Submit and fade out + redirect
+    // ✅ Submit handler with fade + redirect
     document.getElementById("feedbackForm").addEventListener("submit", function (e) {
       e.preventDefault();
+      
+      // Optional: collect form data for sending to Formspree/Airtable/etc.
+      // const formData = new FormData(this);
+      // console.log([...formData.entries()]);
+
       const container = document.getElementById("feedbackContainer");
       container.classList.add("fade-out");
 
-      // Optional: Send to Formspree or your server
       setTimeout(() => {
         localStorage.removeItem("peel_uninstall_unlock");
         window.location.href = "https://shopwithpeel.com";
