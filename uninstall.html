@@ -36,11 +36,11 @@
     }
 
     .logo {
-  width: 110px;
-  position: absolute;
-  top: 5px;
-  left: 10px;
-}
+      width: 110px;
+      position: absolute;
+      top: 0px;
+      left: 30px;
+    }
 
     h1 {
       margin-top: 80px;
@@ -60,7 +60,7 @@
       cursor: pointer;
     }
 
-    input[type="checkbox"] {
+    input[type="radio"] {
       margin-right: 10px;
     }
 
@@ -144,13 +144,13 @@
 
     <form id="feedbackForm">
       <div class="reasons">
-        <label><input type="checkbox" name="reason" value="Didn’t find better prices">Didn’t find better prices</label>
-        <label><input type="checkbox" name="reason" value="Didn’t show up while shopping">Didn’t show up while I was shopping</label>
-        <label><input type="checkbox" name="reason" value="Didn’t understand how it worked">Didn’t understand how it worked</label>
-        <label><input type="checkbox" name="reason" value="Too many popups">Too many popups</label>
-        <label><input type="checkbox" name="reason" value="Privacy concerns">Privacy concerns</label>
-        <label><input type="checkbox" name="reason" value="Switched to another tool">Switched to another tool</label>
-        <label><input type="checkbox" name="reason" value="Other" id="otherCheckbox">Other</label>
+        <label><input type="radio" name="reason" value="Didn’t find better prices">Didn’t find better prices</label>
+        <label><input type="radio" name="reason" value="Didn’t show up while shopping">Didn’t show up while I was shopping</label>
+        <label><input type="radio" name="reason" value="Didn’t understand how it worked">Didn’t understand how it worked</label>
+        <label><input type="radio" name="reason" value="Too many popups">Too many popups</label>
+        <label><input type="radio" name="reason" value="Privacy concerns">Privacy concerns</label>
+        <label><input type="radio" name="reason" value="Switched to another tool">Switched to another tool</label>
+        <label><input type="radio" name="reason" value="Other" id="otherRadio">Other</label>
         <div id="otherTextContainer">
           <textarea name="otherText" placeholder="Please share more..."></textarea>
         </div>
@@ -163,33 +163,37 @@
   </div>
 
   <script>
-    // 🔒 Only allow access if coming from uninstall flow
+    // 🔒 Block access unless coming from uninstall flow
     if (!localStorage.getItem("peel_uninstall_unlock")) {
       document.body.innerHTML = "";
       window.close();
     }
 
-    // Show/hide other textbox
-    document.getElementById("otherCheckbox").addEventListener("change", function () {
-      const otherBox = document.getElementById("otherTextContainer");
-      otherBox.style.display = this.checked ? "block" : "none";
+    const otherRadio = document.getElementById("otherRadio");
+    const otherBox = document.getElementById("otherTextContainer");
+
+    document.querySelectorAll('input[name="reason"]').forEach(input => {
+      input.addEventListener("change", function () {
+        if (otherRadio.checked) {
+          otherBox.style.display = "block";
+        } else {
+          otherBox.style.display = "none";
+        }
+      });
     });
 
-    // Submit feedback to Formspree + redirect
+    // Form submission
     document.getElementById("feedbackForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
       const form = e.target;
-      const formData = new FormData(form);
-
-      const reasons = [];
-      form.querySelectorAll('input[name="reason"]:checked').forEach(cb => {
-        reasons.push(cb.value);
-      });
+      const selected = form.querySelector('input[name="reason"]:checked');
+      const reason = selected ? selected.value : "";
+      const otherText = form.otherText ? form.otherText.value : "";
 
       const payload = {
-        reason: reasons.join(", "),
-        otherText: formData.get("otherText") || ""
+        reason,
+        otherText
       };
 
       const container = document.getElementById("feedbackContainer");
