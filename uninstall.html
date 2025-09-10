@@ -36,10 +36,10 @@
     }
 
     .logo {
-      width: 65px;
+      width: 80px;
       position: absolute;
-      top: 10px;
-      left: 15px;
+      top: 15px;
+      left: 20px;
     }
 
     h1 {
@@ -73,12 +73,10 @@
       width: 100%;
       padding: 10px;
       font-size: 15px;
-      font-family: 'Segoe UI', sans-serif;
       border-radius: 6px;
       border: none;
       resize: vertical;
-      background-color: #fff;
-      color: #000;
+      font-family: 'Segoe UI', sans-serif;
     }
 
     .buttons {
@@ -86,7 +84,7 @@
     }
 
     button {
-      background-color: #075e2e;
+      background-color: #0c7c3d;
       border: none;
       padding: 12px 24px;
       font-size: 16px;
@@ -98,14 +96,14 @@
     }
 
     button:hover {
-      background-color: #0f9c4a;
+      background-color: #12b45c;
     }
 
     .reinstall {
       position: absolute;
-      top: 20px;
-      right: 30px;
-      background-color: #075e2e;
+      top: 25px;
+      right: 40px;
+      background-color: #0c7c3d;
       padding: 10px 18px;
       border-radius: 8px;
       font-weight: bold;
@@ -115,7 +113,7 @@
     }
 
     .reinstall:hover {
-      background-color: #0f9c4a;
+      background-color: #12b45c;
     }
 
     .fade-out {
@@ -152,9 +150,7 @@
         <label><input type="checkbox" name="reason" value="Too many popups">Too many popups</label>
         <label><input type="checkbox" name="reason" value="Privacy concerns">Privacy concerns</label>
         <label><input type="checkbox" name="reason" value="Switched to another tool">Switched to another tool</label>
-        <label>
-          <input type="checkbox" name="reason" value="Other" id="otherCheckbox">Other
-        </label>
+        <label><input type="checkbox" name="reason" value="Other" id="otherCheckbox">Other</label>
         <div id="otherTextContainer">
           <textarea name="otherText" placeholder="Please share more..."></textarea>
         </div>
@@ -167,33 +163,56 @@
   </div>
 
   <script>
-    // 🔒 Only allow access if coming from extension uninstall
+    // 🔒 Only allow access if coming from uninstall flow
     if (!localStorage.getItem("peel_uninstall_unlock")) {
-      document.body.innerHTML = ""; // clear entire DOM
-      window.close(); // try to close tab
+      document.body.innerHTML = "";
+      window.close();
     }
 
-    // ✅ Show/hide "Other" text field
+    // Show/hide other textbox
     document.getElementById("otherCheckbox").addEventListener("change", function () {
       const otherBox = document.getElementById("otherTextContainer");
       otherBox.style.display = this.checked ? "block" : "none";
     });
 
-    // ✅ Submit handler with fade + redirect
+    // Submit feedback to Formspree + redirect
     document.getElementById("feedbackForm").addEventListener("submit", function (e) {
       e.preventDefault();
-      
-      // Optional: collect form data for sending to Formspree/Airtable/etc.
-      // const formData = new FormData(this);
-      // console.log([...formData.entries()]);
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      const reasons = [];
+      form.querySelectorAll('input[name="reason"]:checked').forEach(cb => {
+        reasons.push(cb.value);
+      });
+
+      const payload = {
+        reason: reasons.join(", "),
+        otherText: formData.get("otherText") || ""
+      };
 
       const container = document.getElementById("feedbackContainer");
       container.classList.add("fade-out");
 
-      setTimeout(() => {
-        localStorage.removeItem("peel_uninstall_unlock");
-        window.location.href = "https://shopwithpeel.com";
-      }, 700);
+      fetch("https://formspree.io/f/myzdojvz", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        setTimeout(() => {
+          localStorage.removeItem("peel_uninstall_unlock");
+          window.location.href = "https://shopwithpeel.com";
+        }, 700);
+      })
+      .catch(error => {
+        console.error("Submission error:", error);
+        alert("Oops! Something went wrong.");
+      });
     });
   </script>
 
