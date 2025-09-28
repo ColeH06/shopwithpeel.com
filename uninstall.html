@@ -162,62 +162,61 @@
     </form>
   </div>
 
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-if (!urlParams.get("uninstall")) {
-  window.location.replace("https://shopwithpeel.com");
-}
+    <script>
+  const params = new URLSearchParams(window.location.search);
+  const fromExtension = params.get("src") === "ext_uninstall";
 
-    const otherRadio = document.getElementById("otherRadio");
-    const otherBox = document.getElementById("otherTextContainer");
+  if (!fromExtension) {
+    window.location.replace("https://shopwithpeel.com");
+  }
 
-    document.querySelectorAll('input[name="reason"]').forEach(input => {
-      input.addEventListener("change", function () {
-        if (otherRadio.checked) {
-          otherBox.style.display = "block";
-        } else {
-          otherBox.style.display = "none";
-        }
-      });
+  const otherRadio = document.getElementById("otherRadio");
+  const otherBox = document.getElementById("otherTextContainer");
+
+  document.querySelectorAll('input[name="reason"]').forEach(input => {
+    input.addEventListener("change", function () {
+      if (otherRadio.checked) {
+        otherBox.style.display = "block";
+      } else {
+        otherBox.style.display = "none";
+      }
     });
+  });
 
-    // Form submission
-    document.getElementById("feedbackForm").addEventListener("submit", function (e) {
-      e.preventDefault();
+  // Form submission
+  document.getElementById("feedbackForm").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      const form = e.target;
-      const selected = form.querySelector('input[name="reason"]:checked');
-      const reason = selected ? selected.value : "";
-      const otherText = form.otherText ? form.otherText.value : "";
+    const form = e.target;
+    const selected = form.querySelector('input[name="reason"]:checked');
+    const reason = selected ? selected.value : "";
+    const otherText = form.otherText ? form.otherText.value : "";
 
-      const payload = {
-        reason,
-        otherText
-      };
+    const payload = { reason, otherText };
 
-      const container = document.getElementById("feedbackContainer");
-      container.classList.add("fade-out");
+    const container = document.getElementById("feedbackContainer");
+    container.classList.add("fade-out");
 
-      fetch("https://formspree.io/f/myzdojvz", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(payload)
-      })
-      .then(response => {
-        setTimeout(() => {
-          localStorage.removeItem("peel_uninstall_unlock");
-          window.location.href = "https://shopwithpeel.com";
-        }, 700);
-      })
-      .catch(error => {
-        console.error("Submission error:", error);
-        alert("Oops! Something went wrong.");
-      });
+    fetch("https://formspree.io/f/myzdojvz", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => {
+      setTimeout(() => {
+        localStorage.removeItem("peel_uninstall_unlock");
+        window.location.href = "https://shopwithpeel.com";
+      }, 700);
+    })
+    .catch(error => {
+      console.error("Submission error:", error);
+      alert("Oops! Something went wrong.");
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
