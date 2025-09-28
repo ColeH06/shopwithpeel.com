@@ -164,11 +164,11 @@
 
     <script>
   const params = new URLSearchParams(window.location.search);
-  const fromExtension = params.get("src") === "ext_uninstall";
+const isUninstall = params.get("uninstall") === "true";
 
-  if (!fromExtension) {
-    window.location.replace("https://shopwithpeel.com");
-  }
+if (!isUninstall) {
+  window.location.replace("https://shopwithpeel.com");
+}
 
   const otherRadio = document.getElementById("otherRadio");
   const otherBox = document.getElementById("otherTextContainer");
