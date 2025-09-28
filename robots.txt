@@ -1,3 +1,9 @@
 User-agent: *
+Disallow: /firebase-config
+Disallow: /chatbot
+Disallow: /uninstall.html
+
+# Allow everything else
 Allow: /
+
 Sitemap: https://shopwithpeel.com/sitemap.xml
