@@ -162,24 +162,21 @@
     </form>
   </div>
 
-    <script>
+  <script>
   const params = new URLSearchParams(window.location.search);
-const uninstallParam = params.get("uninstall");
+  const isUninstall = params.get("uninstall") === "true";
 
-if (uninstallParam && uninstallParam !== "true") {
-  window.location.replace("https://shopwithpeel.com");
-}
+  if (!isUninstall) {
+    // Redirect anyone who tries to type /uninstall.html manually
+    window.location.replace("https://shopwithpeel.com");
+  }
 
   const otherRadio = document.getElementById("otherRadio");
   const otherBox = document.getElementById("otherTextContainer");
 
   document.querySelectorAll('input[name="reason"]').forEach(input => {
     input.addEventListener("change", function () {
-      if (otherRadio.checked) {
-        otherBox.style.display = "block";
-      } else {
-        otherBox.style.display = "none";
-      }
+      otherBox.style.display = otherRadio.checked ? "block" : "none";
     });
   });
 
@@ -205,7 +202,7 @@ if (uninstallParam && uninstallParam !== "true") {
       },
       body: JSON.stringify(payload)
     })
-    .then(response => {
+    .then(() => {
       setTimeout(() => {
         localStorage.removeItem("peel_uninstall_unlock");
         window.location.href = "https://shopwithpeel.com";
