@@ -164,9 +164,9 @@
 
     <script>
   const params = new URLSearchParams(window.location.search);
-const isUninstall = params.get("uninstall") === "true";
+const uninstallParam = params.get("uninstall");
 
-if (!isUninstall) {
+if (uninstallParam && uninstallParam !== "true") {
   window.location.replace("https://shopwithpeel.com");
 }
 
