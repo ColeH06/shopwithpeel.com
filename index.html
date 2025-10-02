@@ -154,11 +154,13 @@
 
 .fade-in-right {
   opacity: 0;
-  transition: opacity 0.4s ease-out;
+  transform: translateX(40px);
+  transition: opacity 0.35s ease-out, transform 0.35s ease-out;
 }
 
 .fade-in-right.visible {
   opacity: 1;
+  transform: translateX(0);
 }
 
 .fade-in-left.visible {
