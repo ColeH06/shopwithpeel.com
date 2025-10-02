@@ -154,17 +154,16 @@
 
 .fade-in-right {
   opacity: 0;
-  transform: translateX(60px);
-  transition: all 0.4s ease-out;
+  transition: opacity 0.4s ease-out;
+}
+
+.fade-in-right.visible {
+  opacity: 1;
 }
 
 .fade-in-left.visible {
   opacity: 1;
   transform: translateX(0);
-}
-
-.fade-in-right.visible {
-  animation: fadeInFromRight 1.5s ease-out forwards;
 }
 
 .dollar-3d {
